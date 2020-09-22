@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.4.110.247:3306/imooc?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
-    username: imoocUser
+    url: jdbc:mysql://10.4.110.247:3306/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
+    username: pilipiliUser
     password: 123456
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml

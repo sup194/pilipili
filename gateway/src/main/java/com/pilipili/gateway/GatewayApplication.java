@@ -21,9 +21,6 @@ public class GatewayApplication {
 
 	public static void main(String[] args) {
 
-		// 解决elasticsearch启动保存问题
-		System.setProperty("es.set.netty.runtime.available.processors", "false");
-
 		SpringApplication app = new SpringApplication(GatewayApplication.class);
 		Environment env = app.run(args).getEnvironment();
 		LOG.info("启动成功！！");
