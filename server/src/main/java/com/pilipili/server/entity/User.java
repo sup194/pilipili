@@ -3,6 +3,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 用户
@@ -26,11 +30,14 @@ public class User implements Serializable {
     /**
      * 邮箱
      */
+    @Email()
+    @NotBlank(message = "邮箱不能为空")
     private String email;
 
     /**
      * 用户名
      */
+    @NotBlank(message = "用户名不能为空")
     private String name;
 
     /**
@@ -51,6 +58,7 @@ public class User implements Serializable {
     /**
      * 密码
      */
+    @NotBlank(message = "密码不能为空")
     private String password;
 
 }

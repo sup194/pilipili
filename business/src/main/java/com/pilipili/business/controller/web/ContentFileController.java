@@ -1,7 +1,7 @@
 package com.pilipili.business.controller.web;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author sup
  * @since 2020-09-26
  */
-@Controller
+@RestController("webContentFileController")
 @RequestMapping("/contentFile")
-public class ContentFileController {
+public class ContentFileController extends BaseController {
 
 
 

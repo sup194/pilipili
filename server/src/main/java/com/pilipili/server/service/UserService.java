@@ -1,8 +1,6 @@
 package com.pilipili.server.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.pilipili.server.dto.UserDto;
+import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UserService extends IService<User> {
 
 
-
+    ResponseDto register(User user);
 }
