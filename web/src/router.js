@@ -5,6 +5,7 @@ import Login from "./views/login.vue"
 import Register from "./views/register.vue"
 import Detail from "./views/detail.vue"
 import Account from "./views/account.vue"
+import Security from "./views/security.vue"
 
 Vue.use(Router);
 
@@ -29,5 +30,8 @@ export default new Router({
   }, {
     path: "/account",
     component: Account
+  }, {
+    path: "/security",
+    component: Security
   }]
 })

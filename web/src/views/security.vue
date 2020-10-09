@@ -7,43 +7,41 @@
             个人中心
           </div>
           <ul class="list-inline pili-security-ul">
-            <li class="pili-security-active">我的信息</li>
+            <router-link to="/account"><li>我的信息</li></router-link>
             <li>投稿管理</li>
-            <router-link to="/security"><li style="border-bottom: solid 1px #e1e2e5">修改密码</li></router-link>
+            <li style="border-bottom: solid 1px #e1e2e5" class="pili-security-active">修改密码</li>
           </ul>
         </div>
         <div class="pili-security-right">
           <div class="pili-security-right-title">
             <span class="pili-security-right-title-icon"></span>
-            <span class="pili-security-right-title-text">我的信息</span>
+            <span class="pili-security-right-title-text">修改密码</span>
           </div>
           <div class="pili-user-setting-warp">
             <form>
-              <div style="text-align: center; margin-bottom: 3rem;">
-                <div class="pili-tool-avatar-box">
-                  <div class="pili-change-avatar">
-                    更换<br>
-                    头像
-                  </div>
-                  <img src="/static/image/avatar.jpg" class="pili-user-avatar">
+              <div class="form-group row">
+                <label for="passwordOld"
+                       class="col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原密码：</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="passwordOld">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="username"
-                       class="col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称：</label>
+                <label for="passwordNew"
+                       class="col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新密码：</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="username" style="font-size: 14px">
+                  <input type="password" class="form-control" id="passwordNew">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="sign" class="col-sm-2 col-form-label">我的签名：</label>
+                <label for="passwordConfirm" class="col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认密码：</label>
                 <div class="col-sm-8">
-                  <textarea class="form-control" rows="3" id="sign" style="font-size: 14px"></textarea>
+                  <input type="password" class="form-control" id="passwordConfirm">
                 </div>
               </div>
               <br>
               <hr>
-              <button id="saveBtn">保存</button>
+              <button id="confirmBtn">确认</button>
             </form>
           </div>
         </div>
@@ -54,12 +52,12 @@
 
 <script>
   export default {
-    name: 'account',
+    name: 'security',
   }
 </script>
 
 <style>
-  #saveBtn {
+  #confirmBtn {
     width: 110px;
     color: white;
     cursor: pointer;
@@ -70,45 +68,15 @@
     margin: 3rem 36%;
   }
 
-  #saveBtn:hover {
+  #confirmBtn:hover {
     background-color: #00b5e5;
-  }
-
-  .pili-change-avatar {
-    width: 54px;
-    height: 54px;
-    padding-top: 5px;
-    border-radius: 50%;
-    color: white;
-    background-color: #00a1d6;;
-    position: absolute;
-    left: -30px;
-    top: 53px;
-    cursor: pointer;
-  }
-
-  .pili-tool-avatar-box {
-    width: 170px;
-    height: 170px;
-    position: relative;
-    left: 30%;
-    border: 1px solid #e5e9ef;
-    border-radius: 50%;
-  }
-
-  .pili-user-avatar {
-    position: absolute;
-    top: 30px;
-    right: 28px;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
   }
 
   .pili-user-setting-warp {
     font-size: 14px;
     color: #48576a;
     margin-bottom: 10rem;
+    margin-top: 3rem;
   }
 
   .pili-security-ul {
