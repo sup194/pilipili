@@ -26,6 +26,7 @@ CREATE TABLE `category`
     `id`     char(8)     NOT NULL DEFAULT '' COMMENT 'id',
     `parent` char(8)     NOT NULL DEFAULT '' COMMENT '父id',
     `name`   varchar(50) NOT NULL COMMENT '名称',
+    `sort` int comment '顺序',
     PRIMARY KEY (`id`) USING BTREE
 ) engine = innodb
   default charset = utf8mb4 COMMENT = '分类';
@@ -112,7 +113,7 @@ CREATE TABLE `user`
     `id`       char(8)      NOT NULL DEFAULT '' COMMENT 'id',
     `email`    varchar(50)  NOT NULL COMMENT '邮箱',
     `name`     varchar(50)  NULL     DEFAULT NULL COMMENT '用户名',
-    `gender`   char(2)      NULL     DEFAULT NULL COMMENT '用途|枚举[GenderEnum]：MAIE(\"M\",\"男\"),FEMALE(\"F\",\"女\"),SECRET(\"S\",\"保密\")',
+    `gender`   char(2)      NULL     DEFAULT NULL COMMENT '性别|枚举[GenderEnum]：MAIE(\"M\",\"男\"),FEMALE(\"F\",\"女\"),SECRET(\"S\",\"保密\")',
     `sign`     varchar(255) NULL     DEFAULT NULL COMMENT '我的签名',
     `avatar`   varchar(255) NULL     DEFAULT NULL COMMENT '头像',
     `password` char(32)     NOT NULL COMMENT '密码',

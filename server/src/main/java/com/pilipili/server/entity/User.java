@@ -41,7 +41,7 @@ public class User implements Serializable {
     private String name;
 
     /**
-     * 用途|枚举[GenderEnum]：MAlE("M","男"),FEMALE("F","女"),SECRET("S","保密")
+     * 性别|枚举[GenderEnum]：MAlE("M","男"),FEMALE("F","女"),SECRET("S","保密")
      */
     private String gender;
 

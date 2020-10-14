@@ -88,14 +88,14 @@
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
             <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
-              <a href="#">
+              <router-link to="/detail">
                 <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
                 <div class="pili-carousel-mask">
                   <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
                   <span>up 少年api</span>
                   <i class="fa fa-play-circle-o"></i>
                 </div>
-              </a>
+              </router-link>
             </div>
             <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
               <a href="#">

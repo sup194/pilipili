@@ -14,6 +14,9 @@ Pattern = {
   // 手机号正则，11位数字，1开头
   mobilePattern: /^1\d{10}$/,
 
+  // 邮箱正则
+  emailPattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+
   // 图片验证码正则，4位字母，数字
   imageCodePattern: /^[a-zA-Z0-9]{4}$/,
 
@@ -53,6 +56,13 @@ Pattern = {
       return false;
     }
     return this.mobilePattern.test(str);
+  },
+
+  validateEmail: function (str) {
+    if (Tool.isEmpty(str)) {
+      return false;
+    }
+    return this.emailPattern.test(str);
   },
 
   validateImageCode: function (str) {
