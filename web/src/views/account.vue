@@ -8,7 +8,7 @@
           </div>
           <ul class="list-inline pili-security-ul">
             <li class="pili-security-active">我的信息</li>
-            <li>投稿管理</li>
+            <router-link to="/contribution"><li>投稿管理</li></router-link>
             <router-link to="/security"><li style="border-bottom: solid 1px #e1e2e5">修改密码</li></router-link>
           </ul>
         </div>

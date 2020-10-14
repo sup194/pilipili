@@ -34,10 +34,10 @@
           <ul class="navbar-nav">
             <!--<img src="/static/image/nologin.jpg" class="avatar-img"/>-->
             <!--<li class="nav-item active">-->
-              <!--<a class="nav-link" href="/login">登录</a>-->
+            <!--<a class="nav-link" href="/login">登录</a>-->
             <!--</li>-->
             <!--<li class="nav-item active">-->
-              <!--<a class="nav-link" href="/register">注册</a>-->
+            <!--<a class="nav-link" href="/register">注册</a>-->
             <!--</li>-->
 
             <li class="nav-item active avatar-li">
@@ -47,10 +47,12 @@
                 <span class="badge badge-secondary" style="background-color: #FB7299; font-size: 0.6rem">管理员</span>
                 <hr>
                 <ul class="user-info-ul">
-                  <div style="margin-right: 1rem">
-                    <span>投稿</span>
-                    <p>8</p>
-                  </div>
+                  <router-link to="/contribution" target="_blank">
+                    <div style="margin-right: 1rem">
+                      <span>投稿</span>
+                      <p>8</p>
+                    </div>
+                  </router-link>
                   <div>
                     <span>粉丝</span>
                     <p>41</p>
@@ -62,10 +64,12 @@
                 </ul>
                 <hr>
                 <div class="user-info-div" style="text-align: left">
-                  <router-link to="/account">
+                  <router-link to="/account" target="_blank">
                     <div><i class="fa fa-user-o"></i> <span> &nbsp;个人中心</span></div>
                   </router-link>
-                  <div><i class="fa fa-file-video-o"></i> <span> &nbsp;投稿管理</span></div>
+                  <router-link to="/contribution" target="_blank">
+                    <div><i class="fa fa-file-video-o"></i> <span> &nbsp;投稿管理</span></div>
+                  </router-link>
                   <hr>
                   <div><i class="fa fa-power-off"></i> <span> &nbsp;退出</span></div>
                 </div>
@@ -91,7 +95,7 @@
 
           <!-- 模态框主体 -->
           <div class="modal-body" style="padding: 2rem">
-            <form class="form-horizontal" >
+            <form class="form-horizontal">
               <div class="form-group">
                 <label>
                   分类
@@ -102,11 +106,11 @@
               </div>
               <div class="form-group">
                 <label class="control-label">视频上传</label>&nbsp;&nbsp;
-                <input type="file" >
+                <input type="file">
               </div>
               <div class="form-group">
                 <label class="control-label">封面</label>&nbsp;&nbsp;
-                <input type="file" >
+                <input type="file">
               </div>
               <div class="form-group">
                 <label>标题</label>
@@ -175,9 +179,9 @@
         _this.loginMember = loginMember;
       },
 
-      logout () {
+      logout() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/logout/' + _this.loginMember.token).then((response)=>{
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/logout/' + _this.loginMember.token).then((response) => {
           let resp = response.data;
           if (resp.success) {
             Tool.setLoginMember(null);
