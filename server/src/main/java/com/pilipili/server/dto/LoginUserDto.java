@@ -11,8 +11,11 @@ public class LoginUserDto implements Serializable {
 
     private String id;
 
+<<<<<<< HEAD
     private String role;
 
+=======
+>>>>>>> zengx1n
     private String email;
 
     private String name;

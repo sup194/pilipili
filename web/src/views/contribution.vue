@@ -1,0 +1,331 @@
+<template>
+  <main role="main" style="margin: 6rem">
+    <div class="container">
+      <div class="pili-security">
+        <div class="pili-security-left">
+          <div class="pili-security-title">
+            个人中心
+          </div>
+          <ul class="list-inline pili-security-ul">
+            <router-link to="/account">
+              <li>我的信息</li>
+            </router-link>
+            <li class="pili-security-active">投稿管理</li>
+            <router-link to="/security">
+              <li style="border-bottom: solid 1px #e1e2e5">修改密码</li>
+            </router-link>
+          </ul>
+        </div>
+        <div class="pili-security-right">
+          <div class="pili-security-right-title">
+            <span class="pili-security-right-title-icon"></span>
+            <span class="pili-security-right-title-text">投稿管理</span>
+          </div>
+          <div class="pili-user-setting-warp">
+            <div class="row">
+
+              <div class="col-sm-3" style="margin-bottom: 2rem">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103" style="border-radius: 4px"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+              <div class="col-sm-3">
+                <img src="https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg" width="100%"
+                     height="103"/>
+                <a href="#" class="pili-contribution-title">【Photoshop 教程】史上最容易听懂的PS入门基础教程</a>
+                <span class="pili-contribution-time">投稿于： 2016-5-5</span>
+                <i class="fa fa-ellipsis-v pili-contribution-icon">
+                  <div class="pili-contribution-operate">
+                    <ul class="list-inline">
+                      <li>编辑</li>
+                      <li>删除</li>
+                      <li>设为私有</li>
+                    </ul>
+                  </div>
+                </i>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>
+
+<script>
+  $(document).ready(function () {
+
+    $('.pili-contribution-icon').click(function () {
+      $(this).find('.pili-contribution-operate').show();
+    });
+
+    // $(document).on("click", function (e) {
+    //   if ($(".pili-contribution-operate").is(":visible")) {
+    //     $('.pili-contribution-operate').hide();
+    //   } else {
+    //     console.log("该元素是隐藏的");
+    //     if(e.target == $(".pili-contribution-operate")) {
+    //       $(this).find('.pili-contribution-operate').show();
+    //     }
+    //   }
+    // });
+
+  });
+
+  export default {
+    name: 'contribution',
+  }
+</script>
+
+<style>
+  .pili-contribution-icon {
+    position: relative;
+    font-size: 13px;
+    color: #999999;
+    float: right;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .pili-contribution-operate {
+    display: none;
+    font-weight: normal;
+    position: absolute;
+    z-index: 10;
+    padding: 6px 0;
+    background-color: #fff;
+    border: 1px solid #e5e9ef;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .14);
+    width: 98px;
+    height: 134px;
+    text-align: center;
+    font-size: 14px;
+    color: #222;;
+    right: -7px;
+  }
+
+  .pili-contribution-operate li {
+    height: 40px;
+    padding: 0 20px;
+    line-height: 40px;
+    cursor: pointer;
+  }
+
+  .pili-contribution-operate li:hover {
+    background-color: #e5e9ef;
+    color: #15a7d8;
+  }
+
+  .pili-contribution-title {
+    display: block;
+    line-height: 20px;
+    height: 38px;
+    margin: 6px 0;
+    overflow: hidden;
+    color: #222;
+    font-size: 14px;
+  }
+
+  .pili-contribution-time {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #999;
+    white-space: nowrap;
+    height: 14px;
+    line-height: 14px;
+  }
+
+  .pili-user-setting-warp {
+    font-size: 14px;
+    color: #48576a;
+    margin-bottom: 10rem;
+    margin-top: 2rem;
+  }
+
+  .pili-security-ul {
+    width: 100%;
+  }
+
+  .pili-security-ul li {
+    height: 48px;
+    line-height: 48px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .pili-security-ul li:hover {
+    background-color: #00a1d7;
+    color: #ffffff;
+  }
+
+  .pili-security {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e1e2e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .14);
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .pili-security-title {
+    border-bottom: 1px solid #ddd;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    color: #99a2aa;
+    cursor: default;
+  }
+
+  .pili-security-left {
+    float: left;
+    overflow: hidden;
+    /*width: 150px*/
+    width: 15%;
+  }
+
+  .pili-security-right {
+    border-left: 1px solid #ddd;
+    width: 85%;
+    /*width: 828px;*/
+    float: left;
+  }
+
+  .pili-security-right-title {
+    height: 50px;
+    border-bottom: solid 1px #dddddd;
+    padding-left: 30px;
+  }
+
+  .pili-security-right-title-icon {
+    float: left;
+    width: 4px;
+    height: 16px;
+    margin-top: 18px;
+    background-color: #00a1d6;
+    border-radius: 4px
+  }
+
+  .pili-security-right-title-text {
+    float: left;
+    margin: 15px 0 0 5px;
+    color: #00a1d6;
+    font-size: 14px;
+    cursor: default;
+  }
+
+  .pili-security-active {
+    background-color: #00a1d7;
+    color: #ffffff;
+  }
+
+  .pili-user-setting-warp {
+    padding: 20px 60px;
+  }
+</style>

@@ -15,12 +15,21 @@ spring:
         predicates[0]:
           name: Path
           args[0]: /business/**
+<<<<<<< HEAD
       routes[2]:
         id: file
         uri: lb://file
         predicates[0]:
           name: Path
           args[0]: /file/**
+=======
+
+    redis:
+        host: localhost
+        password:
+        port: 6379
+
+>>>>>>> zengx1n
 server:
   port: 9000
 eureka:
