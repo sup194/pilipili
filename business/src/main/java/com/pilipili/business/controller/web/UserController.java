@@ -76,5 +76,4 @@ public class UserController extends BaseController {
         return ResponseDto.success();
     }
 
-
 }

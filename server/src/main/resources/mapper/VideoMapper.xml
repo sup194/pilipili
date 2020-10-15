@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pilipili.server.mapper.VideoMapper">
 
+    <select id="selectVideos" resultType="com.pilipili.server.dto.VideoDto">
+        SELECT video.*, vp.play_volume
+        FROM video
+        LEFT JOIN video_playback vp on video.id = vp.video_id
+        ${ew.customSqlSegment}
+    </select>
 </mapper>

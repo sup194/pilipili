@@ -9,6 +9,10 @@ public class LoginUserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String id;
+
+    private String role;
+
     private String email;
 
     private String name;

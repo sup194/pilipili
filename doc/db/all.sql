@@ -170,3 +170,13 @@ CREATE TABLE `video_content_file`
 ) engine = innodb
   default charset = utf8mb4 COMMENT = '视频内容文件';
 
+-- 视频播放
+DROP TABLE IF EXISTS `video_playback`;
+CREATE TABLE `video_playback`
+(
+    `id`         char(8)      NOT NULL DEFAULT '' COMMENT 'id',
+    video_id char(8) NOT NULL COMMENT '视频ID',
+    play_volume int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '播放量',
+    PRIMARY KEY (`id`) USING BTREE
+) engine = innodb
+  default charset = utf8mb4 COMMENT = '视频播放';
