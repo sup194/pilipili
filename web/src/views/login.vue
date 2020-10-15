@@ -83,13 +83,17 @@
             }
 
             // 登录成功
-            _this.$parent.setLoginMember(loginMember);
-            _this.$router.push('/index');
+            _this.setLoginMember(loginMember);
+            window.location.href = '/index';
           } else {
             toast.warning(resp.message);
             _this.user.password = "";
           }
         });
+      },
+
+      setLoginMember: function (loginMember) {
+        SessionStorage.set(SESSION_KEY_LOGIN_MEMBER, loginMember);
       },
 
     },

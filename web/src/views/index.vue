@@ -375,7 +375,8 @@
           </div>
         </div>
       </div>
-    </div><br>
+    </div>
+    <br>
   </main>
 </template>
 
@@ -396,31 +397,12 @@
   export default {
     name: 'index',
     data: function () {
-      return {
-        news: [],
-      }
+      return {}
     },
     mounted() {
       let _this = this;
-      _this.listNew();
     },
-    methods: {
-      /**
-       * 查询新上好课
-       */
-      listNew() {
-        let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/course/list-new').then((response) => {
-          console.log("查询新上好课结果：", response);
-          let resp = response.data;
-          if (resp.success) {
-            _this.news = resp.content;
-          }
-        }).catch((response) => {
-          console.log("error：", response);
-        })
-      },
-    }
+    methods: {}
   }
 </script>
 

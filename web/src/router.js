@@ -7,6 +7,7 @@ import Detail from "./views/detail.vue"
 import Account from "./views/account.vue"
 import Security from "./views/security.vue"
 import Contribution from "./views/contribution.vue"
+import Test from "./views/test.vue"
 
 Vue.use(Router);
 
@@ -37,5 +38,8 @@ export default new Router({
   }, {
     path: "/contribution",
     component: Contribution
+  }, {
+    path: "/test",
+    component: Test
   }]
 })

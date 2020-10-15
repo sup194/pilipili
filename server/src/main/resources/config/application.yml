@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/pilipili_db?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
     username: root
-    password: 153440
+    password:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
 logging:

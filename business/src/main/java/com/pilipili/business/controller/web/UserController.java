@@ -71,8 +71,10 @@ public class UserController extends BaseController {
 
     @GetMapping("/logout/{token}")
     public ResponseDto logout(@PathVariable String token) {
+
         redisTemplate.delete(token);
         log.info("从redis中删除token:{}", token);
+
         return ResponseDto.success();
     }
 

@@ -32,18 +32,21 @@
             </li>
           </ul>
           <ul class="navbar-nav">
-            <!--<img src="/static/image/nologin.jpg" class="avatar-img"/>-->
-            <!--<li class="nav-item active">-->
-            <!--<a class="nav-link" href="/login">登录</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item active">-->
-            <!--<a class="nav-link" href="/register">注册</a>-->
-            <!--</li>-->
+            <img v-show="!loginMember.id" src="/static/image/nologin.jpg" class="no-avatar-img"/>
+            <li v-show="!loginMember.id" class="nav-item active">
+              <a class="nav-link" href="/login">登录</a>
+            </li>
+            <li v-show="!loginMember.id" class="nav-item active">
+              <a class="nav-link" href="/register">注册</a>
+            </li>
 
-            <li class="nav-item active avatar-li">
-              <img src="/static/image/avatar.jpg" class="avatar-img" id="avatarImg"/>
+
+            <span v-show="loginMember.id">
+              <li class="nav-item active avatar-li">
+              <img v-show="!loginMember.avatar" src="/static/image/avatar.jpg" class="avatar-img"/>
+                <img v-show="loginMember.avatar" v-bind:src="loginMember.avatar" class="avatar-img"/>
               <div class="user-info">
-                <p style=" color: #FB7299; font-weight: bold; margin-bottom: -0.3rem">Misaka Ria</p>
+                <p style=" color: #FB7299; font-weight: bold; margin-bottom: -0.3rem">{{loginMember.name}}</p>
                 <span class="badge badge-secondary" style="background-color: #FB7299; font-size: 0.6rem">管理员</span>
                 <hr>
                 <ul class="user-info-ul">
@@ -71,10 +74,12 @@
                     <div><i class="fa fa-file-video-o"></i> <span> &nbsp;投稿管理</span></div>
                   </router-link>
                   <hr>
-                  <div><i class="fa fa-power-off"></i> <span> &nbsp;退出</span></div>
+                  <div v-on:click="logout()"><i class="fa fa-power-off"></i> <span> &nbsp;退出</span></div>
                 </div>
               </div>
             </li>
+            </span>
+
             <li class="nav-item active">
               <span class="nav-link contribution-btn" data-toggle="modal" data-target="#contributionModal">投稿</span>
             </li>
@@ -143,12 +148,12 @@
 
   $(document).ready(function () {
 
-    $("#avatarImg").mouseenter(function () {
-      $("#avatarImg").attr("class", "avatar-img-h");
+    $(".avatar-img").mouseenter(function () {
+      $(".avatar-img").attr("class", "avatar-img-h");
       $(".user-info").show();
     })
     $(".user-info").mouseleave(function () {
-      $("#avatarImg").attr("class", "avatar-img");
+      $(".avatar-img-h").attr("class", "avatar-img");
       $(".user-info").hide();
     })
 
@@ -164,15 +169,9 @@
     },
     mounted() {
       let _this = this;
+      _this.loginMember = Tool.getLoginMember();
     },
     methods: {
-      /**
-       * 打开登录注册窗口
-       */
-      openLoginModal() {
-        let _this = this;
-        _this.$refs.loginComponent.openLoginModal();
-      },
 
       setLoginMember(loginMember) {
         let _this = this;
@@ -181,15 +180,15 @@
 
       logout() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/logout/' + _this.loginMember.token).then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/user/logout/' + _this.loginMember.token).then((response) => {
           let resp = response.data;
           if (resp.success) {
             Tool.setLoginMember(null);
             _this.loginMember = {};
-            Toast.success("退出登录成功");
-            _this.$router.push("/");
+            toast.success("退出登录成功");
+            _this.$router.push("/index");
           } else {
-            Toast.warning(resp.message);
+            toast.warning(resp.message);
           }
         });
       },
@@ -249,6 +248,13 @@
   }
 
   .avatar-img {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .no-avatar-img {
     width: 2.3rem;
     height: 2.3rem;
     border-radius: 50%;

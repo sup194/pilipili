@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Windows下启动redis服务
+```
+redis-server.exe redis.windows.conf
+```

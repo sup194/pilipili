@@ -15,6 +15,12 @@ spring:
         predicates[0]:
           name: Path
           args[0]: /business/**
+
+    redis:
+        host: localhost
+        password:
+        port: 6379
+
 server:
   port: 9000
 eureka:

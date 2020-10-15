@@ -8,8 +8,12 @@
           </div>
           <ul class="list-inline pili-security-ul">
             <li class="pili-security-active">我的信息</li>
-            <router-link to="/contribution"><li>投稿管理</li></router-link>
-            <router-link to="/security"><li style="border-bottom: solid 1px #e1e2e5">修改密码</li></router-link>
+            <router-link to="/contribution">
+              <li>投稿管理</li>
+            </router-link>
+            <router-link to="/security">
+              <li style="border-bottom: solid 1px #e1e2e5">修改密码</li>
+            </router-link>
           </ul>
         </div>
         <div class="pili-security-right">
@@ -25,20 +29,20 @@
                     更换<br>
                     头像
                   </div>
-                  <img src="/static/image/avatar.jpg" class="pili-user-avatar">
+                  <img class="pili-user-avatar" v-bind:src="loginMember.avatar">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="username"
                        class="col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称：</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="username" style="font-size: 14px">
+                  <input type="text" class="form-control" id="username" style="font-size: 14px" v-model="loginMember.name">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="sign" class="col-sm-2 col-form-label">我的签名：</label>
                 <div class="col-sm-8">
-                  <textarea class="form-control" rows="3" id="sign" style="font-size: 14px"></textarea>
+                  <textarea class="form-control" rows="3" id="sign" style="font-size: 14px" v-model="loginMember.sign"></textarea>
                 </div>
               </div>
               <br>
@@ -55,6 +59,27 @@
 <script>
   export default {
     name: 'account',
+
+    data: function () {
+      return {
+        loginMember: {}
+      }
+    },
+
+    mounted() {
+      let _this = this;
+      _this.loginMember = Tool.getLoginMember();
+    },
+
+    methods: {
+
+      setLoginMember(loginMember) {
+        let _this = this;
+        _this.loginMember = loginMember;
+      },
+
+    },
+
   }
 </script>
 
