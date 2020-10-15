@@ -28,6 +28,11 @@ public class User implements Serializable {
     private String id;
 
     /**
+     * 角色
+     */
+    private String role;
+
+    /**
      * 邮箱
      */
     @Email()

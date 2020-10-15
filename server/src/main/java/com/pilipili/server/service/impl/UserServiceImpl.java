@@ -44,6 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         temp.setAvatar(null);
         temp.setGender("S");
         temp.setSign("该用户很懒,什么也没有留下...");
+        temp.setRole("G");
         this.save(temp);
         return ResponseDto.success();
     }
