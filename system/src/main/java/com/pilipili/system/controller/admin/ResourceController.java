@@ -1,5 +1,11 @@
 package com.pilipili.system.controller.admin;
 
+import com.pilipili.server.dto.ResourceDto;
+import com.pilipili.server.dto.ResponseDto;
+import com.pilipili.server.exception.ValidatorException;
+import com.pilipili.server.util.ValidatorUtil;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import com.pilipili.server.service.ResourceService;
 import com.pilipili.server.entity.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,8 +33,9 @@ public class ResourceController extends BaseController {
     @Autowired
     private ResourceService resourceService;
 
+    //    List列表查询
     @GetMapping(value = "/")
-    public ResponseEntity<Page<Resource>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
+    public ResponseDto list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
         if (current == null) {
             current = 1;
         }
@@ -34,20 +43,42 @@ public class ResourceController extends BaseController {
             pageSize = 10;
         }
         Page<Resource> aPage = resourceService.page(new Page<>(current, pageSize));
-        return new ResponseEntity<>(aPage, HttpStatus.OK);
+        return ResponseDto.success(aPage);
     }
 
+    /**
+     * 保存，id有值时更新，无值时新增
+     */
+    @PostMapping("/save")
+    public ResponseDto save(@RequestBody String jsonStr) {
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<Object> create(@RequestBody Resource params) {
-        resourceService.save(params);
-        return new ResponseEntity<>("created successfully", HttpStatus.OK);
+//        抛出异常
+        // 保存校验
+//        ValidatorUtil.require(jsonStr, "资源");
+
+        if (StringUtils.isEmpty(jsonStr)) {
+            throw new ValidatorException(jsonStr + "不能为空");
+        }
+        resourceService.saveJson(jsonStr);
+        return ResponseDto.success();
     }
 
+    /**
+     * 删除
+     */
     @PostMapping(value = "/delete/{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+    public ResponseDto delete(@PathVariable("id") String id) {
         resourceService.removeById(id);
-        return new ResponseEntity<>("deleted successfully", HttpStatus.OK);
+        return ResponseDto.success();
+    }
+
+    /**
+     * 资源树查询
+     */
+    @GetMapping("/load-tree")
+    public ResponseDto loadTree() {
+        List<ResourceDto> resourceDtoList = resourceService.loadTree();
+        return ResponseDto.success(resourceDtoList);
     }
 
 }
