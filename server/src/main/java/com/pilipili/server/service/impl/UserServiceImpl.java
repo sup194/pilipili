@@ -2,9 +2,12 @@ package com.pilipili.server.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.LoginDto;
 import com.pilipili.server.dto.LoginUserDto;
 import com.pilipili.server.dto.ResponseDto;
+import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.entity.User;
 import com.pilipili.server.exception.BusinessException;
 import com.pilipili.server.exception.BusinessExceptionCode;
@@ -15,6 +18,9 @@ import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.UuidUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -28,6 +34,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+
+    @Resource
+    UserMapper userMapper;
 
     @Override
     public ResponseDto register(User user) {
@@ -67,4 +76,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             }
         }
     }
+
+    @Override
+    public IPage<UserDto> paging(Page page, QueryWrapper<User> wrapper) {
+        return userMapper.paging(page, wrapper);
+    }
+
+
 }

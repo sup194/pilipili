@@ -3,6 +3,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 角色
@@ -21,16 +24,19 @@ public class Role implements Serializable {
     /**
      * id
      */
+
     private String id;
 
     /**
      * 角色
      */
+    @NotBlank(message = "角色不能为空")
     private String name;
 
     /**
      * 描述
      */
+    @NotBlank(message = "描述填写 1 ~ 100个字之间 ")
     private String desc;
 
 }

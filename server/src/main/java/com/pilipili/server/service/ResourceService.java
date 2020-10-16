@@ -1,7 +1,10 @@
 package com.pilipili.server.service;
 
+import com.pilipili.server.dto.ResourceDto;
 import com.pilipili.server.entity.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ResourceService extends IService<Resource> {
 
+    void saveJson(String jsonStr);
+
+    List<ResourceDto> loadTree();
 }

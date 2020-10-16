@@ -2,9 +2,13 @@ package com.pilipili.business.controller.web;
 
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.LoginDto;
 import com.pilipili.server.dto.LoginUserDto;
 import com.pilipili.server.dto.ResponseDto;
+import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.entity.User;
 import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.util.UuidUtil;
@@ -54,6 +58,10 @@ public class UserController extends BaseController {
      */
     @PostMapping("/login")
     public ResponseDto login(@RequestBody LoginDto loginDto) {
+        IPage<UserDto> pagedata = userService.paging(new Page(), new QueryWrapper<User>()
+                .eq("name", "admin")
+                .orderByDesc("created_at"));
+
         log.info("用户登录开始");
         //  验证邮箱密码
         ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(loginDto);
