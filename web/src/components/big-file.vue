@@ -28,7 +28,7 @@
         default: 50 * 1024
       },
       url: {
-        default: "oss-append"
+        default: "oss-simple"
         // default: "upload"
       },
       afterUpload: {
@@ -43,6 +43,7 @@
     methods: {
       uploadFile() {
         let _this = this;
+        console.log("上传文件开始");
         let formData = new window.FormData;
         let file = _this.$refs.file.files[0];
 

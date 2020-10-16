@@ -120,9 +120,9 @@ public class OssController {
     }
 
     @PostMapping("/oss-simple")
-    public ResponseDto fileUpload(@RequestParam MultipartFile file, String use) throws IOException {
+    public ResponseDto fileUpload(@RequestParam MultipartFile file) throws IOException {
         log.info("上传文件开始");
-        FileUseEnum useEnum = FileUseEnum.getByCode(use);
+        FileUseEnum useEnum = FileUseEnum.getByCode("S");
         String key = UuidUtil.getShortUuid();
         String fileName = file.getOriginalFilename();
         String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
