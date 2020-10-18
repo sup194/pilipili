@@ -7,7 +7,7 @@ spring:
       max-request-size: 50MB
 file:
   path: E:/file/pilipili/
-  domain:
+  domain: http://127.0.0.1:9000/file/f/
 server:
   port: 9004
   servlet:

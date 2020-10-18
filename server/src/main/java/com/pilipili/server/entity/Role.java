@@ -1,4 +1,5 @@
 package com.pilipili.server.entity;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Role implements Serializable {
     /**
      * 描述
      */
+    @TableField("`desc`")
     private String desc;
 
 }
