@@ -1,4 +1,6 @@
 package com.pilipili.server.entity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import java.io.Serializable;
@@ -9,8 +11,8 @@ import lombok.EqualsAndHashCode;
  * 文件
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-18
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -45,8 +47,9 @@ public class File implements Serializable {
     private Integer size;
 
     /**
-     * 用途|枚举[FileUseEnum]：STUDY("S", "学习"), ENTERTAINMENT("E", "娱乐")
+     * 用途|枚举[FileUseEnum]：STUDY("S", "学习"), ENTERTAINMENT("E", "娱乐"),COVER("C","封面")
      */
+    @TableField("`use`")
     private String use;
 
     /**
@@ -59,6 +62,25 @@ public class File implements Serializable {
      */
     private Date updatedAt;
 
+    /**
+     * 已上传分片
+     */
+    private Integer shardIndex;
 
+    /**
+     * 分片大小|B
+     */
+    private Integer shardSize;
+
+    /**
+     * 分片总数
+     */
+    private Integer shardTotal;
+
+    /**
+     * 文件标识
+     */
+    @TableField("`key`")
+    private String key;
 
 }
