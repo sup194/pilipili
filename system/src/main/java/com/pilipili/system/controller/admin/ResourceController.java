@@ -25,7 +25,7 @@ import java.util.List;
  * @author sup
  * @since 2020-09-24
  */
-@Controller
+@RestController
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
 

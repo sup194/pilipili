@@ -10,6 +10,7 @@ import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.service.UserService;
 import com.pilipili.server.util.UuidUtil;
 import com.pilipili.server.util.ValidatorUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.DigestUtils;
@@ -31,6 +32,7 @@ import java.util.concurrent.TimeUnit;
  * @author sup
  * @since 2020-09-24
  */
+@Slf4j
 @RestController
 @RequestMapping("/admin/user")
 public class UserController extends BaseController {
@@ -40,8 +42,10 @@ public class UserController extends BaseController {
     //login
     @PostMapping("/login")
     public ResponseDto login(@RequestBody LoginDto loginDto) {
-        LOG.info("用户登录开始");
-        loginDto.setPassword(DigestUtils.md5DigestAsHex(loginDto.getPassword().getBytes()));
+        log.info("用户登录开始");
+        log.info("email = "+loginDto.getEmail());
+        log.info("password = "+loginDto.getPassword());
+//        loginDto.setPassword(DigestUtils.md5DigestAsHex(loginDto.getPassword().getBytes()));
 
         //  验证邮箱密码
         ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(loginDto);
@@ -56,10 +60,8 @@ public class UserController extends BaseController {
         return ResponseDto.success(loginUserDto);
     }
 
-
-
     //list
-    @GetMapping("/")
+    @GetMapping("/list")
     public ResponseDto list() {
         LOG.info("用户查询");
         Page<User> aPage = userService.page(new Page<>(1, 6));

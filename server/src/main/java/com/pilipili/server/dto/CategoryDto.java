@@ -1,20 +1,33 @@
-package com.pilipili.server.entity;
+package com.pilipili.server.dto;
 
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.EqualsAndHashCode;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode(callSuper = false)
-@TableName("category")
-public class Category {
+public class CategoryDto {
 
-//    用户ID
+    /**
+     * id
+     */
+    @NotBlank(message = "id不能为空")
     private String id;
 
+    /**
+     * 父id
+     */
+    @NotBlank(message = "父id不能为空")
     private String parent;
 
+    /**
+     * 名称
+     */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
+    /**
+     * 顺序
+     */
+    @NotNull(message = "顺序不能为空")
     private Integer sort;
 
     public String getId() {
@@ -49,6 +62,7 @@ public class Category {
         this.sort = sort;
     }
 
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -62,4 +76,5 @@ public class Category {
         sb.append("]");
         return sb.toString();
     }
+
 }

@@ -16,12 +16,12 @@
 
       <div class="row">
         <div class="col-sm-1" style="border-right: solid 1px #E7E7E7">
-          <div class="fa fa-home pili-category-home"></div>
+          <div class="fa fa-home pili-videoCategory-home"></div>
           <br>
           <a href="#" style="font-size: 0.93rem; margin-left: 0.3rem">首页</a>
         </div>
         <div class="col-sm-8" style="border-right: solid 1px #E7E7E7">
-          <ul class="pili-category-ul" style="margin-bottom: 2rem">
+          <ul class="pili-videoCategory-ul" style="margin-bottom: 2rem">
             <a href="#">动画&nbsp;<span class="badge badge-secondary">15</span></a>
             <a href="#">音乐&nbsp;<span class="badge badge-secondary">15</span></a>
             <a href="#">生活&nbsp;<span class="badge badge-secondary">15</span></a>
@@ -31,7 +31,7 @@
             <a href="#">搞笑&nbsp;<span class="badge badge-secondary">15</span></a>
             <a href="#">游戏&nbsp;<span class="badge badge-secondary">15</span></a>
           </ul>
-          <ul class="pili-category-ul">
+          <ul class="pili-videoCategory-ul">
             <a href="#">数码&nbsp;<span class="badge badge-secondary">15</span></a>
             <a href="#">编程&nbsp;<span class="badge badge-secondary">125</span></a>
             <a href="#">绘画&nbsp;<span class="badge badge-secondary">15</span></a>
@@ -525,7 +525,7 @@
     bottom: 0.5rem;
   }
 
-  .pili-category-home {
+  .pili-videoCategory-home {
     width: 2.5rem;
     height: 2.5rem;
     color: #ffffff;
@@ -536,7 +536,7 @@
     border-radius: 50%;
   }
 
-  .pili-category-ul a {
+  .pili-videoCategory-ul a {
     display: block;
     float: left;
     width: 10%;
@@ -544,7 +544,7 @@
     font-size: 0.9rem;
   }
 
-  .pili-category-ul span {
+  .pili-videoCategory-ul span {
     background-color: #73C9E5;
   }
 

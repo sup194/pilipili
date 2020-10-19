@@ -31,7 +31,7 @@ import java.util.List;
  * @since 2020-09-24
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/role")
 public class RoleController extends BaseController {
 
@@ -53,7 +53,6 @@ public class RoleController extends BaseController {
      */
     @PostMapping("/save")
     public ResponseDto save(@RequestBody RoleDto roleDto) {
-
 
         // 保存校验
         ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(roleDto);
@@ -109,8 +108,6 @@ public class RoleController extends BaseController {
         List<String> resourceIdList = roleService.listResource(roleId);
         return ResponseDto.success(resourceIdList);
     }
-
-
 
     //通过ID删除
 

@@ -18,10 +18,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for category
+-- Table structure for videoCategory
 -- ----------------------------
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE `category`
+DROP TABLE IF EXISTS `videoCategory`;
+CREATE TABLE `videoCategory`
 (
     `id`     char(8)     NOT NULL DEFAULT '' COMMENT 'id',
     `parent` char(8)     NOT NULL DEFAULT '' COMMENT '父id',

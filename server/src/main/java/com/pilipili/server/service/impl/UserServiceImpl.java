@@ -60,18 +60,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public LoginUserDto login(LoginDto loginDto) {
+//        获取邮箱名
         User user = this.getOne(new QueryWrapper<User>().eq("email", loginDto.getEmail()));
 
         if (user == null) {
             log.info("邮箱不存在, {}", loginDto.getEmail());
             throw new BusinessException(BusinessExceptionCode.LOGIN_EMAIL_ERROR);
         } else {
+
             if (user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))) {
-                //  登录成功
+                log.info("登录成功！，密码校验完成");
                 LoginUserDto loginUserDto = CopyUtil.copy(user, LoginUserDto.class);
                 return loginUserDto;
             } else {
-                log.info("密码不对, 输入密码：{}, 数据库密码：{}", loginDto.getPassword(), user.getPassword());
+//                log.info("密码不对, 输入密码：{}, 数据库密码：{}", loginDto.getPassword(), user.getPassword());
+                log.info("现输入密码 = "+loginDto.getPassword());
+                log.info("数据库密码 = "+user.getPassword());
+
                 throw new BusinessException(BusinessExceptionCode.LOGIN_EMAIL_ERROR);
             }
         }

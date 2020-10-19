@@ -1,16 +1,16 @@
 package com.pilipili.server.mapper;
 
-import com.pilipili.server.entity.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.pilipili.server.entity.Category;
 
-/**
- * <p>
- * 视频分类 Mapper 接口
- * </p>
- *
- * @author sup
- * @since 2020-09-24
- */
+import java.util.List;
+
 public interface CategoryMapper extends BaseMapper<Category> {
+    List<Category> selectList();
+
+    void save(Category category);
+
+    int updateById(Category category);
+
 
 }

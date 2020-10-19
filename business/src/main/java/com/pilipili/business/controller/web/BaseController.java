@@ -2,7 +2,7 @@ package com.pilipili.business.controller.web;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.PageDto;
-import com.pilipili.server.service.CategoryService;
+import com.pilipili.server.service.Video_CategoryService;
 import com.pilipili.server.service.UserService;
 import com.pilipili.server.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class BaseController {
     protected UserService userService;
 
     @Autowired
-    protected CategoryService categoryService;
+    protected Video_CategoryService videoCategoryService;
 
     @Autowired
     protected RedisTemplate redisTemplate;
