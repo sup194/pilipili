@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  * 视频内容文件 服务实现类
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author 
+ * @since 2020-10-19
  */
 @Service
 public class ContentFileServiceImpl extends ServiceImpl<ContentFileMapper, ContentFile> implements ContentFileService {

@@ -9,9 +9,9 @@ public class GeberatorUIServer {
 
     public static void main(String[] args) {
         System.out.println("http://localhost:8068");
-        GeneratorConfig config = GeneratorConfig.builder().jdbcUrl("jdbc:mysql://10.4.110.247:3306/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true")
-                .userName("pilipiliUser")
-                .password("123456")
+        GeneratorConfig config = GeneratorConfig.builder().jdbcUrl("jdbc:mysql://121.199.53.219:3306/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true")
+                .userName("root")
+                .password("Zx1534408497..")
                 .driverClassName("com.mysql.jdbc.Driver")
                 //数据库schema，POSTGRE_SQL,ORACLE,DB2类型的数据库需要指定
                 .schemaName("myBusiness")

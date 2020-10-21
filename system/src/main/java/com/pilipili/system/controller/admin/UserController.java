@@ -43,8 +43,6 @@ public class UserController extends BaseController {
     @PostMapping("/login")
     public ResponseDto login(@RequestBody LoginDto loginDto) {
         log.info("用户登录开始");
-        log.info("email = "+loginDto.getEmail());
-        log.info("password = "+loginDto.getPassword());
 //        loginDto.setPassword(DigestUtils.md5DigestAsHex(loginDto.getPassword().getBytes()));
 
         //  验证邮箱密码

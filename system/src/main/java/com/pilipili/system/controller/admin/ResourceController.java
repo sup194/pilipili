@@ -49,19 +49,19 @@ public class ResourceController extends BaseController {
     /**
      * 保存，id有值时更新，无值时新增
      */
-    @PostMapping("/save")
-    public ResponseDto save(@RequestBody String jsonStr) {
-
-//        抛出异常
-        // 保存校验
-//        ValidatorUtil.require(jsonStr, "资源");
-
-        if (StringUtils.isEmpty(jsonStr)) {
-            throw new ValidatorException(jsonStr + "不能为空");
-        }
-        resourceService.saveJson(jsonStr);
-        return ResponseDto.success();
-    }
+//    @PostMapping("/save")
+//    public ResponseDto save(@RequestBody String jsonStr) {
+//
+////        抛出异常
+//        // 保存校验
+////        ValidatorUtil.require(jsonStr, "资源");
+//
+//        if (StringUtils.isEmpty(jsonStr)) {
+//            throw new ValidatorException(jsonStr + "不能为空");
+//        }
+//        resourceService.saveJson(jsonStr);
+//        return ResponseDto.success();
+//    }
 
     /**
      * 删除
@@ -75,10 +75,10 @@ public class ResourceController extends BaseController {
     /**
      * 资源树查询
      */
-    @GetMapping("/load-tree")
-    public ResponseDto loadTree() {
-        List<ResourceDto> resourceDtoList = resourceService.loadTree();
-        return ResponseDto.success(resourceDtoList);
-    }
+//    @GetMapping("/load-tree")
+//    public ResponseDto loadTree() {
+//        List<ResourceDto> resourceDtoList = resourceService.loadTree();
+//        return ResponseDto.success(resourceDtoList);
+//    }
 
 }

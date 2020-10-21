@@ -1,5 +1,6 @@
 package com.pilipili.business.controller.admin;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Controller;
  * @author sup
  * @since 2020-09-26
  */
-@Controller
-@RequestMapping("/contentFile")
+@Slf4j
+@RestController
+@RequestMapping("/admin/contentFile")
 public class ContentFileController {
 
 

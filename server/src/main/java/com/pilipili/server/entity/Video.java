@@ -4,13 +4,16 @@ import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 视频
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author 
+ * @since 2020-10-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,6 +30,7 @@ public class Video implements Serializable {
     /**
      * 名称
      */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     /**
@@ -45,7 +49,7 @@ public class Video implements Serializable {
     private String image;
 
     /**
-     * 状态|枚举[VideoStatusEnum]：REVIEW("R", "审核中"),PASS("P", "通过"),OVERRULE("O", "驳回")
+     * 状态|枚举[CourseStatusEnum]：REVIEW("R", "审核中"),PASS("P", "通过"),OVERRULE("O", "驳回")
      */
     private String status;
 
@@ -62,6 +66,7 @@ public class Video implements Serializable {
     /**
      * 用户ID
      */
+    @NotBlank(message = "userId不能为空")
     private String userId;
 
     /**
@@ -73,5 +78,11 @@ public class Video implements Serializable {
      * 修改时间
      */
     private Date updatedAt;
+
+    /**
+     * 投稿视频url
+     */
+    @NotBlank(message = "视频地址不能为空")
+    private String url;
 
 }

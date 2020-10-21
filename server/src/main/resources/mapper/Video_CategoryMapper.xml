@@ -3,5 +3,19 @@
 <mapper namespace="com.pilipili.server.mapper.Video_CategoryMapper">
 
 
+    <select id="QueryVideoByCategoryID" resultType="com.pilipili.server.dto.VideoDto">
+    select * from pilipili.video
+        left join pilipili.video_category c
+        on video.id = c.video_id
+        where category_id = #{category_id}
+
+    </select>
+
+    <select id="QueryCategoryById" resultType="com.pilipili.server.entity.Category">
+        select * from pilipili.category
+        left join pilipili.video_category c
+        on category.id = c.category_id
+        where video_id = #{video_id}
+    </select>
 
 </mapper>

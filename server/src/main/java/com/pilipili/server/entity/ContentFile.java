@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
  * 视频内容文件
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author 
+ * @since 2020-10-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

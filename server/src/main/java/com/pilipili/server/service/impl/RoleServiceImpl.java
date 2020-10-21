@@ -39,13 +39,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         resourceMapper.deleteById(roleId);
 
         // 保存角色资源
-        for (int i = 0; i < resourceIds.size(); i++) {
-            Resource resource = new Resource();
-            resource.setId(UuidUtil.getShortUuid());
-            resource.setRoleId(roleId);
-            resource.setResourceId(resourceIds.get(i));
-            resourceMapper.insert(resource);
-        }
+//        for (int i = 0; i < resourceIds.size(); i++) {
+//            Resource resource = new Resource();
+//            resource.setId(UuidUtil.getShortUuid());
+//            resource.setRoleId(roleId);
+//            resource.setResourceId(resourceIds.get(i));
+//            resourceMapper.insert(resource);
+//        }
     }
 
         // 加载用户资源
@@ -56,9 +56,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         List<Resource> roleResourceList = resourceMapper.selectBatchIds(Collections.singleton(roleId));
 
         List<String> resourceIdList = new ArrayList<>();
-        for (int i = 0, l = roleResourceList.size(); i < l; i++) {
-            resourceIdList.add(roleResourceList.get(i).getResourceId());
-        }
+//        for (int i = 0, l = roleResourceList.size(); i < l; i++) {
+//            resourceIdList.add(roleResourceList.get(i).getResourceId());
+//        }
         return resourceIdList;
     }
 
