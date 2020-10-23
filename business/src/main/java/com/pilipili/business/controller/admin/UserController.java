@@ -33,7 +33,7 @@ public class UserController {
 
     @Resource
     UserService userService;
-
+//  通过ID查询用户
     @PostMapping("/selectById/{id}")
     public ResponseDto selectById(@PathVariable("id") String id){
         log.info("通过ID查询");
@@ -44,6 +44,7 @@ public class UserController {
         User user = userService.getById(id);
         return ResponseDto.success(user);
     }
+
 
 //    用户修改
     @PostMapping("/updateById")

@@ -11,12 +11,14 @@ import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.entity.User;
 import com.pilipili.server.exception.BusinessException;
 import com.pilipili.server.exception.BusinessExceptionCode;
+import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.mapper.UserMapper;
 import com.pilipili.server.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.UuidUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CORBA.SystemException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -70,6 +72,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             if (user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))) {
                 log.info("登录成功！，密码校验完成");
+
+//                权限校验
+                if(!user.getRole().equals("A")){
+                    throw  new ValidatorException("非权限用户无法访问");
+                }
+
                 LoginUserDto loginUserDto = CopyUtil.copy(user, LoginUserDto.class);
                 return loginUserDto;
             } else {
