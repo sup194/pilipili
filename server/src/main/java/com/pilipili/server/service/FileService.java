@@ -1,6 +1,5 @@
 package com.pilipili.server.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pilipili.server.dto.FileDto;
 import com.pilipili.server.entity.File;
 import com.baomidou.mybatisplus.extension.service.IService;

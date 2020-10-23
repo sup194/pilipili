@@ -4,8 +4,9 @@ import lombok.Data;
 
 public enum FileUseEnum {
 
-    COURSE("S", "学习"),
-    TEACHER("E", "娱乐");
+    STUDY("S", "学习"),
+    ENTERTAINMENT("E", "娱乐"),
+    COVER("C", "封面");
 
     private String code;
 

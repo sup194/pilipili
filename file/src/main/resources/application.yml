@@ -19,6 +19,6 @@ eureka:
 oss:
   accessKeyId: LTAI4FyRfMYtnQpHuXao58CE
   accessKeySecret: KPILKCpx5AvxOZI7wWX8RkCh5qx0v6
-  endpoint: http://oss-cn-guangzhou.aliyuncs.com
-  domain: http://online-pilipili.oss-cn-guangzhou.aliyuncs.com
+  endpoint: https://oss-cn-guangzhou.aliyuncs.com
+  domain: https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/
   bucket: online-pilipili

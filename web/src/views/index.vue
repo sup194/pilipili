@@ -87,9 +87,9 @@
 
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
+            <div class="col-sm-4 pili-carousel-item">
               <router-link to="/detail">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
+                <img src="/static/image/shamo.jpg"/>
                 <div class="pili-carousel-mask">
                   <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
                   <span>up 少年api</span>
@@ -97,7 +97,7 @@
                 </div>
               </router-link>
             </div>
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
+            <div class="col-sm-4 pili-carousel-item">
               <a href="#">
                 <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
                 <div class="pili-carousel-mask">
@@ -107,7 +107,7 @@
                 </div>
               </a>
             </div>
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
+            <div class="col-sm-4 pili-carousel-item">
               <a href="#">
                 <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
                 <div class="pili-carousel-mask">
@@ -161,7 +161,7 @@
             <div class="row pili-video-list">
               <div class="col-sm-3">
                 <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
+                  <img src="/static/image/shamo.jpg"/>
                   <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
                 </a>
                 <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
@@ -252,7 +252,7 @@
               </div>
               <div class="col-sm-3">
                 <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
+                  <img src="/static/image/shamo.jpg"/>
                   <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
                 </a>
                 <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
@@ -397,12 +397,44 @@
   export default {
     name: 'index',
     data: function () {
-      return {}
+      return {
+        news: [],
+        hots: [],
+        studyHots: [],
+      }
     },
+
     mounted() {
       let _this = this;
     },
-    methods: {}
+
+    methods: {
+
+      listNew() {
+        let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/listNew').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.news = resp.content;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listHot() {
+        let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.news = resp.content;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+    }
   }
 </script>
 
@@ -470,6 +502,8 @@
 
   .pili-video-list img {
     width: 100%;
+    height: 110px;
+    border-radius: 4px;
   }
 
   .pili-video-list span {
@@ -498,13 +532,17 @@
     width: 85%;
     bottom: 0;
     display: none;
+    border-radius: 4px;
     padding: 0.2rem;
     background: rgba(47, 13, 26, 0.9);
   }
 
   .pili-carousel-item {
     position: relative;
+  }
 
+  .pili-carousel-item:nth-child(-n+3) {
+    margin-bottom: 0.9rem;
   }
 
   .pili-carousel-item div span {
@@ -514,7 +552,8 @@
 
   .pili-carousel-list img {
     width: 100%;
-    height: 100%;
+    height: 110px;
+    border-radius: 4px;
   }
 
   .pili-carousel-mask i {

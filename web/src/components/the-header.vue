@@ -110,12 +110,34 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label">视频上传</label>&nbsp;&nbsp;
-                <input type="file">
+                <!--<label class="control-label">封面</label>-->
+                <div>
+                  <big-file v-bind:input-id="'image-upload'"
+                            v-bind:text="'上传封面'"
+                            v-bind:use="'C'"
+                            v-bind:suffixs="['jpg', 'jpeg', 'png']"
+                            v-bind:after-upload="afterUpload1"></big-file>
+                  <div v-show="video.image" class="row">
+                    <div class="col-md-6">
+                      <img v-bind:src="video.image"  class="img-responsive">
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
-                <label class="control-label">封面</label>&nbsp;&nbsp;
-                <input type="file">
+                <!--<label class="control-label">视频</label>-->
+                <div>
+                  <big-file v-bind:input-id="'video-upload'"
+                            v-bind:text="'上传视频'"
+                            v-bind:use="'S'"
+                            v-bind:suffixs="['mp4']"
+                            v-bind:after-upload="afterUpload2"></big-file>
+                  <div v-show="video.url" class="row">
+                    <div class="col-md-6">
+                      <video v-bind:src="video.url" id="video" controls="controls"></video>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label>标题</label>
@@ -159,12 +181,15 @@
 
   });
 
+  import BigFile from '../components/big-file.vue'
+
   export default {
     name: 'theHeader',
-    components: {},
+    components: {BigFile},
     data: function () {
       return {
-        loginMember: {}
+        loginMember: {},
+        video: {},
       }
     },
     mounted() {
@@ -191,6 +216,22 @@
             toast.warning(resp.message);
           }
         });
+      },
+
+      afterUpload1(resp) {
+        let _this = this;
+        let image = resp.content.path;
+        _this.video.image = image;
+        console.log(image);
+        console.log(_this.video.image)
+      },
+
+      afterUpload2(resp) {
+        let _this = this;
+        let url = resp.content.path;
+        _this.video.url = url;
+        console.log(url);
+        console.log(_this.video.url)
       },
 
     }
@@ -300,5 +341,18 @@
     top: 0.5rem;
     right: -0.5rem;
     z-index: 10;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
   }
 </style>

@@ -2,10 +2,13 @@ package com.pilipili.server.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 /**
  * <p>
  * 文件
