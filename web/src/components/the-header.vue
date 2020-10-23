@@ -141,22 +141,22 @@
               </div>
               <div class="form-group">
                 <label>标题</label>
-                <input type="text" class="form-control" placeholder="">
+                <input v-model="video.name" type="text" class="form-control" placeholder="">
               </div>
               <div class="form-group">
                 <label>简介</label>
-                <textarea class="form-control"></textarea>
+                <textarea v-model="video.summary" class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <label>时长</label>
-                <input type="text" class="form-control" readonly="readonly">
+                <input v-model="video.time" type="text" class="form-control" readonly="readonly">
               </div>
             </form>
           </div>
 
           <!-- 模态框底部 -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="contributionBtn">立即投稿</button>
+            <button type="button" class="btn btn-secondary" id="contributionBtn" v-on:click="contribution()">立即投稿</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
           </div>
 
@@ -190,13 +190,60 @@
       return {
         loginMember: {},
         video: {},
+        categorys: [],
+        tree: {},
       }
     },
     mounted() {
       let _this = this;
       _this.loginMember = Tool.getLoginMember();
+      _this.allCategory();
     },
     methods: {
+
+      /**
+       * 点击【保存】
+       */
+      contribution(page) {
+        let _this = this;
+
+        let loginMember = Tool.getLoginMember();
+        if (Tool.isEmpty(loginMember)) {
+          toast.warning("登录之后才可以投稿哦~");
+          return;
+        }
+
+        // 保存校验
+        if (1 != 1
+            || !Validator.require(_this.video.name, "标题")
+            || !Validator.length(_this.course.name, "名称", 1, 50)
+            || !Validator.length(_this.video.summary, "概述", 1, 2000)
+            || !Validator.length(_this.video.image, "封面", 1, 100)
+            || !Validator.length(_this.video.video, "视频", 1, 200)
+        ) {
+          return;
+        }
+
+        let categorys = _this.tree.getCheckedNodes();
+        if (Tool.isEmpty(categorys)) {
+          toast.warning("请选择分类！");
+          return;
+        }
+        _this.course.categorys = categorys;
+
+        Loading.show();
+        _this.$ajax.post('http://localhost:9000/business/admin/video/contribution', _this.video).then((response)=>{
+          Loading.hide();
+          let resp = response.data;
+          if (resp.success) {
+            $("#form-modal").modal("hide");
+            _this.list(1);
+            toast.success("投稿成功！等待管理员审核！");
+          } else {
+            toast.warning(resp.message)
+          }
+        })
+      },
 
       setLoginMember(loginMember) {
         let _this = this;
@@ -230,8 +277,56 @@
         let _this = this;
         let url = resp.content.path;
         _this.video.url = url;
+        _this.getTime();
         console.log(url);
         console.log(_this.video.url)
+      },
+
+      allCategory() {
+        let _this = this;
+        Loading.show();
+        _this.$ajax.post('http://localhost:9000/business/web/category/all').then((response)=>{
+          Loading.hide();
+          let resp = response.data;
+          _this.categorys = resp.content;
+
+          _this.initTree();
+        })
+      },
+
+      initTree() {
+        let _this = this;
+        let setting = {
+          check: {
+            enable: true
+          },
+          data: {
+            simpleData: {
+              idKey: "id",
+              pIdKey: "parent",
+              rootPId: "00000000",
+              enable: true
+            }
+          }
+        };
+
+        let zNodes = _this.categorys;
+
+        _this.tree = $.fn.zTree.init($("#tree"), setting, zNodes);
+
+        // 展开所有的节点
+        // _this.tree.expandAll(true);
+      },
+
+      /**
+       * 获取时长
+       */
+      getTime() {
+        let _this = this;
+        setTimeout(function () {
+          let ele = document.getElementById("video");
+          _this.section.time = parseInt(ele.duration, 10);
+        }, 1000);
       },
 
     }
