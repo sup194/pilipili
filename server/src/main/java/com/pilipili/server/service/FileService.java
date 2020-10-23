@@ -15,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface FileService extends IService<File> {
 
     FileDto findByKey(String key);
+
+    void save(FileDto fileDto);
 }

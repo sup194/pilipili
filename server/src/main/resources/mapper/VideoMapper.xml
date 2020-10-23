@@ -7,6 +7,7 @@
         SELECT
             v.*,
             vp.play_volume
+            
         FROM video v
         JOIN video_playback vp ON vp.video_id = v.id
         JOIN video_category vc ON v.id = vc.video_id
