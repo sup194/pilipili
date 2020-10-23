@@ -38,7 +38,7 @@ public class OssController {
     @Value("${oss.bucket}")
     private String bucket;
 
-    @Value("${oss.domain}")
+    @Value("oss.domain")
     private String ossDomain;
 
     @Autowired

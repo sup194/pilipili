@@ -1,9 +1,14 @@
 <template>
   <div id="app">
-    <file v-bind:input-id="'video-upload'"
+    <file v-bind:input-id="'image-upload'"
           v-bind:text="'上传'"
           v-bind:suffixs="['mp4', 'jpg', 'png']"
           v-bind:after-upload="afterUpload"></file>
+    <big-file v-bind:input-id="'video-upload'"
+              v-bind:text="'上传大文件'"
+              v-bind:use="'S'"
+              v-bind:suffixs="['mp4', 'jpg', 'png']"
+              v-bind:after-upload="afterUpload"></big-file>
     <div>
       <video width="320" height="240" controls>
         <source src="https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/course/E6HnsQM5.mp4" type="video/mp4">

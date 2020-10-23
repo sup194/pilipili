@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://121.199.53.219/pilipili?useUnicode=true&useSSL=false&characterEncoding=utf8&autoReconnect=true
     username: root
-    password:
+    password: Zx1534408497..
   redis:
-    host: localhost
-    password:
+    host: 121.199.53.219
+    password: 123456
     port: 6379
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml

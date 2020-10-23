@@ -4,7 +4,7 @@
       <i class="ace-icon fa fa-upload"></i>
       {{text}}
     </button>
-    <input class="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
+    <input style="display: none" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
   </div>
 </template>
 
@@ -25,10 +25,10 @@
         default: ""
       },
       shardSize: {
-        default: 50 * 1024
+        default: 10 * 1024 * 1024
       },
       url: {
-        default: "oss-simple"
+        default: "oss-append"
         // default: "upload"
       },
       afterUpload: {
@@ -95,7 +95,7 @@
        */
       check(param) {
         let _this = this;
-        _this.$ajax.get('http://localhost:9000/file/admin/check/' + param.key).then((response) => {
+        _this.$ajax.get('http://127.0.0.1:9000/file/admin/check/' + param.key).then((response) => {
           let resp = response.data;
           if (resp.success) {
             let obj = resp.content;

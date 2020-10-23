@@ -1,5 +1,6 @@
 package com.pilipili.server.service;
 
+import com.pilipili.server.dto.FileDto;
 import com.pilipili.server.entity.File;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FileService extends IService<File> {
 
+    FileDto findByKey(String key);
+
+    void save(FileDto fileDto);
 }
