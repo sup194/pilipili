@@ -1,12 +1,14 @@
 package com.pilipili.system.controller.admin;
 
+import com.pilipili.server.entity.Resource;
+import com.pilipili.server.service.ResourceService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.pilipili.server.service.ResourceService;
-import com.pilipili.server.entity.Resource;
+import com.pilipili.server.service.RoleResourceService;
+import com.pilipili.server.entity.RoleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

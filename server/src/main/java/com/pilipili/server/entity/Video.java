@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
  * 视频
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -73,5 +73,20 @@ public class Video implements Serializable {
      * 修改时间
      */
     private Date updatedAt;
+
+    /**
+     * 投稿视频url
+     */
+    private String url;
+
+    /**
+     * 标识|枚举[SignEnum]：STUDY("S", "学习"),ENTERTAINMENT("E", "娱乐")
+     */
+    private String sign;
+
+    /**
+     * 播放量
+     */
+    private Integer playback;
 
 }

@@ -2,7 +2,7 @@ package com.pilipili.business.controller.web;
 
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.entity.Category;
-import lombok.extern.slf4j.Slf4j;
+import com.pilipili.server.entity.VideoCategory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

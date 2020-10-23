@@ -1,6 +1,6 @@
 package com.pilipili.server.service;
 
-import com.pilipili.server.entity.ContentFile;
+import com.pilipili.server.entity.VideoContentFile;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author sup
  * @since 2020-09-24
  */
-public interface ContentFileService extends IService<ContentFile> {
+public interface VideoContentFileService extends IService<VideoContentFile> {
 
 }

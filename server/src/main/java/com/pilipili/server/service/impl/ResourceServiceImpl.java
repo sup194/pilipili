@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 角色资源关联 服务实现类
+ * 资源 服务实现类
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-22
  */
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {

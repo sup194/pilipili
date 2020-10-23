@@ -23,7 +23,7 @@ public class BaseController {
     protected RedisTemplate redisTemplate;
 
     @Autowired
-    VideoService videoService;
+    protected VideoService videoService;
 
     public Page getPage(PageDto pageDto) {
         int pn = pageDto.getPage() != null ? pageDto.getPage() : 1;

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
  * <p>
- * 分类
+ * 角色资源关联
  * </p>
  *
  * @author sup194
@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("category")
-public class Category implements Serializable {
+@TableName("role_resource")
+public class RoleResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,18 +24,13 @@ public class Category implements Serializable {
     private String id;
 
     /**
-     * 父id
+     * 角色|id
      */
-    private String parent;
+    private String roleId;
 
     /**
-     * 名称
+     * 资源|id
      */
-    private String name;
-
-    /**
-     * 顺序
-     */
-    private Integer sort;
+    private String resourceId;
 
 }

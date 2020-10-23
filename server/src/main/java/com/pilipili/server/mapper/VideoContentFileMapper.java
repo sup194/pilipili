@@ -1,6 +1,6 @@
 package com.pilipili.server.mapper;
 
-import com.pilipili.server.entity.ContentFile;
+import com.pilipili.server.entity.VideoContentFile;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author sup
  * @since 2020-09-24
  */
-public interface ContentFileMapper extends BaseMapper<ContentFile> {
+public interface VideoContentFileMapper extends BaseMapper<VideoContentFile> {
 
 }

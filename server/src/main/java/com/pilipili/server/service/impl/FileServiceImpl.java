@@ -24,7 +24,7 @@ import java.util.List;
 public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements FileService {
 
 
-    public File SelectByKey(String key) {
+    public File selectByKey(String key) {
 
         List<File> list = this.list(new QueryWrapper<File>().eq("`key`", key));
         if (CollectionUtil.isEmpty(list)) {
@@ -36,6 +36,6 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
 
     @Override
     public FileDto findByKey(String key) {
-        return CopyUtil.copy(SelectByKey(key), FileDto.class);
+        return CopyUtil.copy(selectByKey(key), FileDto.class);
     }
 }

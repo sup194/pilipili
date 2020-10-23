@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.Video;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pilipili.server.exception.ValidatorException;
+import com.pilipili.server.util.ValidatorUtil;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -49,6 +49,17 @@ public class VideoController extends BaseController {
                 null, null, "P", "play_volume");
         return ResponseDto.success(pageData);
     }
+
+    @PostMapping("/contribution")
+    public ResponseDto contribution(@RequestBody VideoDto videoDto) {
+        ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(videoDto);
+        if (validResult.hasErrors()) {
+            throw new ValidatorException(validResult.getErrors());
+        }
+        videoService.mySave(videoDto);
+        return ResponseDto.success();
+    }
+
 
 
 }

@@ -4,12 +4,20 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.VideoDto;
+import com.pilipili.server.entity.Category;
 import com.pilipili.server.entity.Video;
+import com.pilipili.server.entity.VideoCategory;
 import com.pilipili.server.mapper.VideoMapper;
+import com.pilipili.server.service.CategoryService;
+import com.pilipili.server.service.VideoCategoryService;
 import com.pilipili.server.service.VideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.pilipili.server.util.CopyUtil;
+import com.pilipili.server.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,14 +31,46 @@ import org.springframework.stereotype.Service;
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements VideoService {
 
     @Autowired
-    VideoMapper videoMapper;
+    private VideoMapper videoMapper;
+
+    @Autowired
+    private VideoCategoryService videoCategoryService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+
 
     public IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order) {
-        QueryWrapper wrapper = new QueryWrapper<Video>()
-                .eq(categoryId != null, "category_id", categoryId)
-                .eq(userId != null, "user_id", userId)
-                .eq(status != null, "status", status)
-                .orderByDesc(order != null, order);
-        return videoMapper.selectVideos(page, wrapper);
+
+        return videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
+                .eq("status", "P").orderByDesc("play_volume"));
+    }
+
+
+    @Override
+    public void mySave(VideoDto videoDto) {
+
+        List<String> categoryIds = videoDto.getCategoryId();
+        String uuid = UuidUtil.getShortUuid();
+
+        Category category = categoryService.getById(categoryIds.get(0));
+        String sign = (category.getParent() == "00000100") ? "E" : "S";
+        videoDto.setSign(sign);
+        videoDto.setPlayback(0);
+
+        for (String categoryId : categoryIds) {
+            VideoCategory videoCategory = new VideoCategory();
+            videoCategory.setId(UuidUtil.getShortUuid());
+            videoCategory.setCategoryId(categoryId);
+            videoCategory.setVideoId(uuid);
+
+            videoCategoryService.save(videoCategory);
+        }
+
+
+        videoDto.setId(uuid);
+        Video video = CopyUtil.copy(videoDto, Video.class);
+        this.save(video);
     }
 }

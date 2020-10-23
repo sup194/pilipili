@@ -5,16 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
  * <p>
- * 分类
+ * 视频内容文件
  * </p>
  *
- * @author sup194
- * @since 2020-10-22
+ * @author sup
+ * @since 2020-09-24
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("category")
-public class Category implements Serializable {
+@TableName("video_content_file")
+public class VideoContentFile implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,18 +24,23 @@ public class Category implements Serializable {
     private String id;
 
     /**
-     * 父id
+     * 视频id
      */
-    private String parent;
+    private String videoId;
 
     /**
-     * 名称
+     * 地址
+     */
+    private String url;
+
+    /**
+     * 文件名
      */
     private String name;
 
     /**
-     * 顺序
+     * 大小|字节b
      */
-    private Integer sort;
+    private Integer size;
 
 }

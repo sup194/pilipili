@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
  * <p>
- * 分类
+ * 视频分类
  * </p>
  *
  * @author sup194
@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("category")
-public class Category implements Serializable {
+@TableName("video_category")
+public class VideoCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,18 +24,13 @@ public class Category implements Serializable {
     private String id;
 
     /**
-     * 父id
+     * 视频|video.id
      */
-    private String parent;
+    private String videoId;
 
     /**
-     * 名称
+     * 分类|video.id
      */
-    private String name;
-
-    /**
-     * 顺序
-     */
-    private Integer sort;
+    private String categoryId;
 
 }

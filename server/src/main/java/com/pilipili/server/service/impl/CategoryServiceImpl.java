@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 视频分类 服务实现类
+ * 分类 服务实现类
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-22
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {

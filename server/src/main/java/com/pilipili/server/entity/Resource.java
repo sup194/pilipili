@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
  * <p>
- * 角色资源关联
+ * 资源
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("role_resource")
+@TableName("resource")
 public class Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,13 +24,23 @@ public class Resource implements Serializable {
     private String id;
 
     /**
-     * 角色|id
+     * 名称|菜单或按钮
      */
-    private String roleId;
+    private String name;
 
     /**
-     * 资源|id
+     * 页面|路由
      */
-    private String resourceId;
+    private String page;
+
+    /**
+     * 请求|接口
+     */
+    private String request;
+
+    /**
+     * 父id
+     */
+    private String parent;
 
 }

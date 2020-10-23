@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UploadController {
 
-    @Value("${file.domain}")
+    @Value("${oss.domain}")
     private String FILE_DOMAIN;
 
-    @Value("${file.path}")
-    private String FILE_PATH;
 
     @Autowired
     private FileService fileService;

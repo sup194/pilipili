@@ -18,4 +18,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface VideoService extends IService<Video> {
 
     IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order);
+    void mySave(VideoDto videoDto);
 }
