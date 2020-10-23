@@ -198,6 +198,54 @@
     },
     methods: {
 
+<<<<<<< Updated upstream
+=======
+      /**
+       * 点击【保存】
+       */
+      contribution(page) {
+        // c
+        let _this = this;
+
+        let loginMember = Tool.getLoginMember();
+        if (Tool.isEmpty(loginMember)) {
+          toast.warning("登录之后才可以投稿哦~");
+          return;
+        }
+
+        // 保存校验
+        if (1 != 1
+            || !Validator.require(_this.video.name, "标题")
+            || !Validator.length(_this.course.name, "名称", 1, 50)
+            || !Validator.length(_this.video.summary, "概述", 1, 2000)
+            || !Validator.length(_this.video.image, "封面", 1, 100)
+            || !Validator.length(_this.video.video, "视频", 1, 200)
+        ) {
+          return;
+        }
+
+        let categorys = _this.tree.getCheckedNodes();
+        if (Tool.isEmpty(categorys)) {
+          toast.warning("请选择分类！");
+          return;
+        }
+        _this.course.categorys = categorys;
+
+        Loading.show();
+        _this.$ajax.post('http://localhost:9000/business/admin/video/contribution', _this.video).then((response)=>{
+          Loading.hide();
+          let resp = response.data;
+          if (resp.success) {
+            $("#form-modal").modal("hide");
+            _this.list(1);
+            toast.success("投稿成功！等待管理员审核！");
+          } else {
+            toast.warning(resp.message)
+          }
+        })
+      },
+
+>>>>>>> Stashed changes
       setLoginMember(loginMember) {
         let _this = this;
         _this.loginMember = loginMember;
