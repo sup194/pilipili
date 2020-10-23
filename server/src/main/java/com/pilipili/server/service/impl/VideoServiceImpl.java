@@ -3,6 +3,7 @@ package com.pilipili.server.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.pilipili.server.dto.CategoryDto;
 import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.Category;
 import com.pilipili.server.entity.Video;
@@ -47,22 +48,33 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .eq("status", "P").orderByDesc("play_volume"));
     }
 
+    @Override
+    public IPage<VideoDto> paging(Page page, String status, String sign, String order) {
+
+        IPage<VideoDto> videoDto = videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
+                .eq("sign", sign)
+                .eq("status", "P")
+                .orderByDesc("play_volume"));
+        return videoDto;
+    }
+
 
     @Override
     public void mySave(VideoDto videoDto) {
 
-        List<String> categoryIds = videoDto.getCategoryId();
+        List<CategoryDto> categories = videoDto.getCategories();
+        CategoryDto categoryDto = categories.get(0);
         String uuid = UuidUtil.getShortUuid();
 
-        Category category = categoryService.getById(categoryIds.get(0));
+        Category category = categoryService.getById(categoryDto.getId());
         String sign = (category.getParent() == "00000100") ? "E" : "S";
         videoDto.setSign(sign);
         videoDto.setPlayback(0);
 
-        for (String categoryId : categoryIds) {
+        for (CategoryDto dto : categories) {
             VideoCategory videoCategory = new VideoCategory();
             videoCategory.setId(UuidUtil.getShortUuid());
-            videoCategory.setCategoryId(categoryId);
+            videoCategory.setCategoryId(dto.getId());
             videoCategory.setVideoId(uuid);
 
             videoCategoryService.save(videoCategory);

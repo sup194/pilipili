@@ -3,6 +3,7 @@ package com.pilipili.server.dto;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -77,11 +78,9 @@ public class VideoDto implements Serializable {
     @Length(min = 1, max = 200, message = "url长度错误")
     private String url;
 
-    /**
-     * 分类ID
-     */
-    @NotNull(message = "分类ID不能为空")
-    private List<String> categoryId;
+
+    @Valid
+    private List<CategoryDto> categories;
 
     /**
      * 标识|枚举[SignEnum]：STUDY("S", "学习"),ENTERTAINMENT("E", "娱乐")
