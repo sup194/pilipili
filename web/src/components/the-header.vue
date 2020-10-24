@@ -101,39 +101,39 @@
           <!-- 模态框主体 -->
           <div class="modal-body" style="padding: 2rem">
             <form class="form-horizontal">
-              <div class="form-group">
-                <label>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
                   分类
                 </label>
-                <div>
+                <div class="col-sm-9">
                   <ul id="tree" class="ztree"></ul>
                 </div>
               </div>
-              <div class="form-group">
-                <!--<label class="control-label">封面</label>-->
-                <div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">封面</label>
+                <div class="col-md-10">
                   <big-file v-bind:input-id="'image-upload'"
-                            v-bind:text="'上传封面'"
+                            v-bind:text="'点击上传'"
                             v-bind:use="'C'"
                             v-bind:suffixs="['jpg', 'jpeg', 'png']"
                             v-bind:after-upload="afterUpload1"></big-file>
-                  <div v-show="video.image" class="row">
-                    <div class="col-md-6">
+                  <div v-show="video.image">
+                    <div class="col-md-10">
                       <img v-bind:src="video.image"  class="img-responsive">
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <!--<label class="control-label">视频</label>-->
-                <div>
+              <div class="form-group row">
+                <label class="control-label col-sm-2">视频</label>
+                <div  class="col-md-10">
                   <big-file v-bind:input-id="'video-upload'"
-                            v-bind:text="'上传视频'"
+                            v-bind:text="'点击上传'"
                             v-bind:use="'S'"
                             v-bind:suffixs="['mp4']"
                             v-bind:after-upload="afterUpload2"></big-file>
                   <div v-show="video.url" class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                       <video v-bind:src="video.url" id="video" controls="controls"></video>
                     </div>
                   </div>
@@ -190,7 +190,7 @@
       return {
         loginMember: {},
         video: {},
-        categorys: [],
+        categories: [],
         tree: {},
       }
     },
@@ -216,29 +216,33 @@
         // 保存校验
         if (1 != 1
             || !Validator.require(_this.video.name, "标题")
-            || !Validator.length(_this.course.name, "名称", 1, 50)
-            || !Validator.length(_this.video.summary, "概述", 1, 2000)
+            || !Validator.length(_this.video.name, "名称", 1, 50)
+            || !Validator.length(_this.video.summary, "概述", 1, 200)
             || !Validator.length(_this.video.image, "封面", 1, 100)
             || !Validator.length(_this.video.video, "视频", 1, 200)
         ) {
           return;
         }
 
-        let categorys = _this.tree.getCheckedNodes();
-        if (Tool.isEmpty(categorys)) {
+        let categories = _this.tree.getCheckedNodes();
+        if (Tool.isEmpty(categories)) {
           toast.warning("请选择分类！");
           return;
         }
-        _this.course.categorys = categorys;
+        _this.video.categories = categories;
+        _this.video.userId = _this.loginMember.id;
+        console.log(categories);
 
         Loading.show();
-        _this.$ajax.post('http://localhost:9000/business/admin/video/contribution', _this.video).then((response)=>{
+        _this.$ajax.post('http://localhost:9000/business/web/video/contribution', _this.video).then((response)=>{
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
-            $("#form-modal").modal("hide");
-            _this.list(1);
             toast.success("投稿成功！等待管理员审核！");
+            $("#contributionModal").modal({
+              show: false,
+              backdrop:'static'
+            });
           } else {
             toast.warning(resp.message)
           }
@@ -269,8 +273,6 @@
         let _this = this;
         let image = resp.content.path;
         _this.video.image = image;
-        console.log(image);
-        console.log(_this.video.image)
       },
 
       afterUpload2(resp) {
@@ -278,18 +280,16 @@
         let url = resp.content.path;
         _this.video.url = url;
         _this.getTime();
-        console.log(url);
-        console.log(_this.video.url)
       },
 
       allCategory() {
         let _this = this;
-        Loading.show();
-        _this.$ajax.post('http://localhost:9000/business/web/category/all').then((response)=>{
-          Loading.hide();
+        // Loading.show();
+        _this.$ajax.get('http://localhost:9000/business/web/category/all').then((response)=>{
+          // Loading.hide();
           let resp = response.data;
-          _this.categorys = resp.content;
-
+          _this.categories = resp.content;
+          console.log("获取全部分类");
           _this.initTree();
         })
       },
@@ -310,7 +310,7 @@
           }
         };
 
-        let zNodes = _this.categorys;
+        let zNodes = _this.categories;
 
         _this.tree = $.fn.zTree.init($("#tree"), setting, zNodes);
 
@@ -325,8 +325,8 @@
         let _this = this;
         setTimeout(function () {
           let ele = document.getElementById("video");
-          _this.section.time = parseInt(ele.duration, 10);
-        }, 1000);
+          _this.video.time = parseInt(ele.duration, 10);
+        }, 10000);
       },
 
     }

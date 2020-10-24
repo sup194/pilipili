@@ -8,6 +8,7 @@ import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.Category;
 import com.pilipili.server.entity.Video;
 import com.pilipili.server.entity.VideoCategory;
+import com.pilipili.server.enums.VideoStatusEnum;
 import com.pilipili.server.mapper.VideoMapper;
 import com.pilipili.server.service.CategoryService;
 import com.pilipili.server.service.VideoCategoryService;
@@ -18,6 +19,7 @@ import com.pilipili.server.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,6 +44,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
 
 
+    @Override
     public IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order) {
 
         return videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
@@ -63,7 +66,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public void mySave(VideoDto videoDto) {
 
         List<CategoryDto> categories = videoDto.getCategories();
-        CategoryDto categoryDto = categories.get(0);
+        CategoryDto categoryDto = categories.get(1);
         String uuid = UuidUtil.getShortUuid();
 
         Category category = categoryService.getById(categoryDto.getId());
@@ -83,6 +86,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         videoDto.setId(uuid);
         Video video = CopyUtil.copy(videoDto, Video.class);
+        video.setStatus(VideoStatusEnum.REVIEW.getCode());
+        video.setCreatedAt(new Date());
+        video.setUpdatedAt(new Date());
+
         this.save(video);
     }
 }

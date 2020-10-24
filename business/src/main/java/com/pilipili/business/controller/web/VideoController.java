@@ -52,11 +52,14 @@ public class VideoController extends BaseController {
 
     @PostMapping("/contribution")
     public ResponseDto contribution(@RequestBody VideoDto videoDto) {
+
+        System.out.println(videoDto);
         ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(videoDto);
         if (validResult.hasErrors()) {
             throw new ValidatorException(validResult.getErrors());
         }
         videoService.mySave(videoDto);
+
         return ResponseDto.success();
     }
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UploadController {
 
-    @Value("${oss.domain}")
+    @Value("https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/")
     private String FILE_DOMAIN;
 
 

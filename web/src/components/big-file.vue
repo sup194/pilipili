@@ -1,7 +1,6 @@
 <template>
   <div>
-    <button type="button" v-on:click="selectFile()" class="btn btn-white btn-default btn-round">
-      <i class="ace-icon fa fa-upload"></i>
+    <button type="button" v-on:click="selectFile()" class="btn btn-primary btn-sm">
       {{text}}
     </button>
     <input style="display: none" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
