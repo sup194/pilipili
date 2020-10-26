@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.dto.VideoDto;
+import com.pilipili.server.entity.Video;
 import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.util.ValidatorUtil;
 import com.pilipili.server.vo.VideoVo;
@@ -37,31 +38,36 @@ public class VideoController extends BaseController {
     public ResponseDto hotList() {
         Page page = new Page(1, 6);
         IPage<VideoDto> pageData = videoService.paging(page,
-                null, null, "P", "play_volume");
+                null, null, "P", "playback");
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/newStudyList")
     public ResponseDto newStudyList() {
         Page page = new Page(1, 8);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "create_at");
+
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "S")
+                .eq("status", "P")
+                .orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/newEntertainmentList")
     public ResponseDto newEntertainmentList() {
         Page page = new Page(1, 8);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "E",  "create_at");
+
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
+                .eq("status", "P")
+                .orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/hotStudyList")
     public ResponseDto hotStudyList() {
         Page page = new Page(1, 10);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "play_volume");
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
+                .eq("status", "P")
+                .orderByDesc("playback"));
         return ResponseDto.success(pageData);
     }
 

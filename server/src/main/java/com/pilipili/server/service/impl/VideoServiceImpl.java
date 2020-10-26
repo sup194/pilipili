@@ -1,12 +1,9 @@
 package com.pilipili.server.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.CategoryDto;
-import com.pilipili.server.dto.CommentDto;
 import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.*;
@@ -20,7 +17,6 @@ import com.pilipili.server.vo.VideoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,9 +39,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
 
     @Autowired
-    private CommentService commentService;
-
-    @Autowired
     private UserService userService;
 
 
@@ -61,15 +54,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return videoMapper.selectVideoes(page,wrapper);
     }
 
-    @Override
-    public IPage<VideoDto> paging(Page page, String status, String sign, String order) {
-
-        IPage<VideoDto> videoDto = videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
-                .eq("sign", sign)
-                .eq("status", status)
-                .orderByDesc(order));
-        return videoDto;
-    }
 
 
     @Override
@@ -118,22 +102,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         VideoVo videoVo = CopyUtil.copy(video, VideoVo.class);
 
         //  查询分类
-        List<CategoryDto> categories = videoCategoryService.listByVideoId(new QueryWrapper<CategoryDto>().eq("videoId", id));
+        List<CategoryDto> categories = videoCategoryService.listByVideoId(new QueryWrapper<CategoryDto>().eq("video_id", id));
         videoVo.setCategories(categories);
 
-        //  查询评论
-
-        IPage<CommentDto> pageData = commentService.paging(new Page(1, 10),
-                new QueryWrapper<CommentDto>().eq("video_id", id).orderByDesc("created_id"));
-
-        List<Comment> commentList = commentService.list(Wrappers.<Comment>query().lambda().eq(Comment::getUserId, id));
-        List<CommentDto> comments = new ArrayList<>();
-        if (!CollectionUtil.isEmpty(commentList)) {
-            for (Comment comment : commentList) {
-                CommentDto commentDto = CopyUtil.copy(comment, CommentDto.class);
-                comments.add(commentDto);
-            }
-        }
 
         // 查询用户
         User user = userService.getById(video.getUserId());
@@ -148,7 +119,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         videoVo.setUserDto(userDto);
 
-        videoVo.setComments(comments);
 
         return videoVo;
     }

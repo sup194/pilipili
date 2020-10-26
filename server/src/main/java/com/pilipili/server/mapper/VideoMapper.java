@@ -22,7 +22,5 @@ import org.springframework.stereotype.Component;
 public interface VideoMapper extends BaseMapper<Video> {
 
 
-    IPage<VideoDto> selectHotStudyVideos(Page page, @Param(Constants.WRAPPER) QueryWrapper<VideoDto> wrapper);
-
     IPage<VideoDto> selectVideoes(Page page, @Param(Constants.WRAPPER) QueryWrapper<VideoDto> wrapper);
 }

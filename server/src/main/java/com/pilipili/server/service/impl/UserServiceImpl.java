@@ -41,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         temp.setEmail(user.getEmail());
         temp.setName(user.getName());
         temp.setPassword(SecureUtil.md5(user.getPassword()));
-        temp.setAvatar(null);
+        temp.setAvatar("https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/cover/OIP.jpg");
         temp.setGender("S");
         temp.setSign("该用户很懒,什么也没有留下...");
         temp.setRole("G");
