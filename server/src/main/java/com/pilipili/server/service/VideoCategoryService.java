@@ -1,7 +1,11 @@
 package com.pilipili.server.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.pilipili.server.dto.CategoryDto;
 import com.pilipili.server.entity.VideoCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VideoCategoryService extends IService<VideoCategory> {
 
+
+    List<CategoryDto> listByVideoId(QueryWrapper<CategoryDto> wrapper);
 }
