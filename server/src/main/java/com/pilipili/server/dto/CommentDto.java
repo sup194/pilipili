@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+
 @Data
 public class CommentDto implements Serializable {
 
@@ -12,7 +13,7 @@ public class CommentDto implements Serializable {
     /**
      * id
      */
-    private String id;
+    private String Id;
 
     /**
      * 用户|user.id
@@ -28,4 +29,6 @@ public class CommentDto implements Serializable {
      * 评论内容
      */
     private String content;
+
+    private UserDto userDto;
 }

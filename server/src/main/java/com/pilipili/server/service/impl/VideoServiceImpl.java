@@ -66,8 +66,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         IPage<VideoDto> videoDto = videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
                 .eq("sign", sign)
-                .eq("status", "P")
-                .orderByDesc("play_volume"));
+                .eq("status", status)
+                .orderByDesc(order));
         return videoDto;
     }
 
@@ -122,6 +122,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         videoVo.setCategories(categories);
 
         //  查询评论
+
+        IPage<CommentDto> pageData = commentService.paging(new Page(1, 10),
+                new QueryWrapper<CommentDto>().eq("video_id", id).orderByDesc("created_id"));
+
         List<Comment> commentList = commentService.list(Wrappers.<Comment>query().lambda().eq(Comment::getUserId, id));
         List<CommentDto> comments = new ArrayList<>();
         if (!CollectionUtil.isEmpty(commentList)) {
@@ -133,9 +137,16 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         // 查询用户
         User user = userService.getById(video.getUserId());
-        UserDto userDto = CopyUtil.copy(user, UserDto.class);
-        videoVo.setUserDto(userDto);
+        UserDto userDto = new UserDto();
+        userDto.setUserId(user.getId());
+        userDto.setAvatar(user.getAvatar());
+        userDto.setEmail(user.getEmail());
+        userDto.setGender(user.getGender());
+        userDto.setSign(user.getSign());
+        userDto.setRole(user.getRole());
+        userDto.setUsername(user.getName());
 
+        videoVo.setUserDto(userDto);
 
         videoVo.setComments(comments);
 
