@@ -100,7 +100,6 @@ public class VideoVo implements Serializable {
      */
     private Integer playback;
 
-    private List<CommentDto> comments;
 
     private UserDto userDto;
 }
