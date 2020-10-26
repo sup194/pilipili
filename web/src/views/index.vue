@@ -87,66 +87,18 @@
 
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
-            <div class="col-sm-4 pili-carousel-item">
-              <router-link to="/detail">
-                <img src="/static/image/shamo.jpg"/>
+
+            <div class="col-sm-4 pili-carousel-item" v-for="o in hots">
+              <router-link v-bind:to="'/detail?id=' + o.id">
+                <img v-bind:src="o.image"/>
                 <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
+                  <span>{{o.name}}</span><br>
+                  <span>up {{o.username}}</span>
                   <i class="fa fa-play-circle-o"></i>
                 </div>
               </router-link>
             </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
+
           </div>
         </div>
       </div>
@@ -159,34 +111,15 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="row pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/shamo.jpg"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
+
+              <div class="col-sm-3" v-for="o in news">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image" />
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
+
             </div>
           </div>
 
@@ -208,62 +141,15 @@
             <span class="video-list-btn" style="margin-right: 1rem"><i
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
+
+              <div class="col-sm-3" v-for="o in entertainmentHots">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image" />
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/shamo.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -272,16 +158,7 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p><span>1</span> <a href="#">跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>2</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>3</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>4</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>5</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>6</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>7</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>8</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>9</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>10</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
+              <p v-for="(o, index) in entertainmentHots"><span>{{index}}}</span> <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link></p>
             </div>
           </div>
         </div>
@@ -297,62 +174,15 @@
             <span class="video-list-btn" style="margin-right: 1rem"><i
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
+
+              <div class="col-sm-3" v-for="o in studyHots">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image" />
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -361,16 +191,9 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p><span>1</span> <a href="#">跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>2</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>3</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>4</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>5</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>6</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>7</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>8</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>9</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>10</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
+
+              <p v-for="(o, index) in entertainmentHots"><span>{{index}}}</span> <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link></p>
+
             </div>
           </div>
         </div>
@@ -401,6 +224,7 @@
         news: [],
         hots: [],
         studyHots: [],
+        entertainmentHots:[],
       }
     },
 
@@ -427,7 +251,31 @@
         _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
           let resp = response.data;
           if (resp.success) {
-            _this.news = resp.content;
+            _this.hots = resp.content;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listStudyHots() {
+        let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.studyHots = resp.content;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listEntertainmentHots() {
+        let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.entertainmentHots = resp.content;
           }
         }).catch((response) => {
           console.log("error：", response);

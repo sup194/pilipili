@@ -46,9 +46,14 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Override
     public IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order) {
+        QueryWrapper<VideoDto> wrapper = new QueryWrapper<VideoDto>()
+                .eq(categoryId != null, "category_id", categoryId)
+                .eq(userId != null, "user_id", userId)
+                .eq(status != null, "status", status)
+                .orderByDesc(order != null, order);
 
-        return videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
-                .eq("status", "P").orderByDesc("play_volume"));
+
+        return null;
     }
 
     @Override
@@ -56,8 +61,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         IPage<VideoDto> videoDto = videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
                 .eq("sign", sign)
-                .eq("status", "P")
-                .orderByDesc("play_volume"));
+                .eq("status", status)
+                .orderByDesc(order));
         return videoDto;
     }
 
@@ -66,11 +71,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public void mySave(VideoDto videoDto) {
 
         List<CategoryDto> categories = videoDto.getCategories();
-        CategoryDto categoryDto = categories.get(1);
+        CategoryDto categoryDto = categories.get(0);
         String uuid = UuidUtil.getShortUuid();
 
-        Category category = categoryService.getById(categoryDto.getId());
-        String sign = (category.getParent() == "00000100") ? "E" : "S";
+        String sign = (categoryDto.getId().equals("00000100")) ? "E" : "S";
         videoDto.setSign(sign);
         videoDto.setPlayback(0);
 

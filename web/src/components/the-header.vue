@@ -238,11 +238,9 @@
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
+            $('#contributionModal').modal('hide');
+            $('.modal-backdrop').remove();
             toast.success("投稿成功！等待管理员审核！");
-            $("#contributionModal").modal({
-              show: false,
-              backdrop:'static'
-            });
           } else {
             toast.warning(resp.message)
           }
@@ -326,7 +324,7 @@
         setTimeout(function () {
           let ele = document.getElementById("video");
           _this.video.time = parseInt(ele.duration, 10);
-        }, 10000);
+        }, 12000);
       },
 
     }

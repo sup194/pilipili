@@ -3,20 +3,18 @@
     <div class="container" style="margin-top: 2rem">
       <div class="row">
         <div class="col-sm-9">
-          <span class="pili-tit">阿飞带孩子们做农家小炒肉，今天忘记分餐，又吃抢起来，失算了</span><br>
-          <span class="pili-video-data">3200播放&nbsp;·&nbsp;90评论&nbsp;2020-10-03 08:55:42</span>
+          <span class="pili-tit">{{video.name}}</span><br>
+          <span class="pili-video-data">{{video.playback}}播放&nbsp;·&nbsp;90评论&nbsp;{{video.createdAt}}</span>
           <div class="video-box" style="margin-top: 1rem; margin-bottom: 0.6rem">
             <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
                           :options="playerOptions"></video-player>
           </div>
           <div class="pili-label">
-            <span>娱乐</span>
-            <span>美食</span>
-            <span>生活</span>
+            <span v-for="o in video.categories">{{o.name}}</span>
           </div>
           <hr>
           <div class="pili-comment-head">
-            <span>677 评论</span>
+            <span>6 评论</span>
           </div>
           <ul class="pili-comment-sort list-inline">
             <li class="pili-hot-sort pili-sort-on">按热度排序</li>
@@ -26,7 +24,7 @@
           <hr>
           <div>
             <div style="float: left; padding: 5px 20px">
-              <img src="/static/image/avatar.jpg" width="48" height="48" style="border-radius: 50%">
+              <img v-bind:src="loginMember.image" width="48" height="48" style="border-radius: 50%">
             </div>
             <div style="width: 77%; float: left">
               <textarea class="form-control" rows="3" placeholder="发条友善的评论" style="font-size: 12px; color: #555;"></textarea>
@@ -42,18 +40,19 @@
 
           <div class="pili-comment-list">
 
-            <div class="pili-comment-list-item">
+            <div class="pili-comment-list-item" v-for="o in comments">
               <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
                                                                       height="48"/></div>
               <div style="float: left; width: 80%">
-                <a>晨雾融雪风吟梦</a><br>
-                <span>疯狂加血的辅助装也挡不住ABC接连去世[doge]不用一秒就被满血融化了，过量治疗也救不了，我说的！</span>
+                <a>{{o.name}}</a><br>
+                <span>{{o.sign}}</span>
                 <p>2020-10-05 09:10:48</p>
                 <div style="width: 111%; padding-bottom: 1rem">
                   <hr>
                 </div>
               </div>
             </div>
+
             <div class="pili-comment-list-item">
               <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
                                                                       height="48"/></div>
@@ -239,6 +238,11 @@
     name: 'detail',
     data() {
       return {
+        id: "",
+        video: {},
+        user: {},
+        comments: [],
+        loginMember: {},
         playerOptions: {
           playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
           autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -251,9 +255,9 @@
           sources: [{
             type: "",
             // src: "https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/course/E6HnsQM5.mp4"
-            src: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" //视频url地址
+            src: "" //视频url地址
           }],
-          poster: "https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg", //你的封面地址
+          poster: "", //你的封面地址
           // width: document.documentElement.clientWidth,
           notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
           controlBar: {
@@ -264,7 +268,29 @@
           }
         }
       }
-    }
+    },
+
+    mounted() {
+      let _this = this;
+      _this.id = _this.$route.query.id;
+      _this.loginMember = Tool.getLoginMember();
+      _this.findVideo();
+    },
+
+    methods: {
+      findVideo() {
+        let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/detail/' + _this.id).then((response) => {
+          let resp = response.data;
+          _this.video = resp.content;
+          _this.user = _this.video.user || {};
+          _this.comments = _this.video.comments;
+          _this.playerOptions.sources[0].src = _this.video.src;
+          _this.playerOptions.poster = _this.video.image;
+        })
+      },
+    },
+
   }
 </script>
 
