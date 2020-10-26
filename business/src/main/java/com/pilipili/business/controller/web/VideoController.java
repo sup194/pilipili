@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.dto.VideoDto;
+import com.pilipili.server.entity.Video;
 import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.util.ValidatorUtil;
 import com.pilipili.server.vo.VideoVo;
@@ -44,24 +45,29 @@ public class VideoController extends BaseController {
     @GetMapping("/newStudyList")
     public ResponseDto newStudyList() {
         Page page = new Page(1, 8);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "created_at");
+
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "S")
+                .eq("status", "P")
+                .orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/newEntertainmentList")
     public ResponseDto newEntertainmentList() {
         Page page = new Page(1, 8);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "E",  "created_at");
+
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
+                .eq("status", "P")
+                .orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/hotStudyList")
     public ResponseDto hotStudyList() {
         Page page = new Page(1, 10);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "playback");
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
+                .eq("status", "P")
+                .orderByDesc("playback"));
         return ResponseDto.success(pageData);
     }
 

@@ -18,7 +18,7 @@ public class CommentController extends BaseController {
     @GetMapping("/list/{id}")
     public ResponseDto list(@PathVariable String id) {
         IPage<CommentDto> pageData = commentService.paging(new Page(1, 10),
-                new QueryWrapper<CommentDto>().eq("video_id", id).orderByDesc("created_id"));
+                new QueryWrapper<CommentDto>().eq("video_id", id).orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 

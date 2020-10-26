@@ -111,7 +111,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         VideoVo videoVo = CopyUtil.copy(video, VideoVo.class);
 
         //  查询分类
-        List<CategoryDto> categories = videoCategoryService.listByVideoId(new QueryWrapper<CategoryDto>().eq("videoId", id));
+        List<CategoryDto> categories = videoCategoryService.listByVideoId(new QueryWrapper<CategoryDto>().eq("video_id", id));
         videoVo.setCategories(categories);
 
 
