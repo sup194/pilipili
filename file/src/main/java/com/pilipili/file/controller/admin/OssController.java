@@ -38,7 +38,7 @@ public class OssController {
     @Value("${oss.bucket}")
     private String bucket;
 
-    @Value("oss.domain")
+    @Value("https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/")
     private String ossDomain;
 
     @Autowired

@@ -3,6 +3,7 @@ package com.pilipili.business.controller.web;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.PageDto;
 import com.pilipili.server.service.CategoryService;
+import com.pilipili.server.service.CommentService;
 import com.pilipili.server.service.UserService;
 import com.pilipili.server.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class BaseController {
 
     @Autowired
     protected VideoService videoService;
+
+    @Autowired
+    CommentService commentService;
 
     public Page getPage(PageDto pageDto) {
         int pn = pageDto.getPage() != null ? pageDto.getPage() : 1;

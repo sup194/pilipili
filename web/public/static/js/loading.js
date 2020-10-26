@@ -4,9 +4,9 @@ Loading = {
       message: '<img src="/static/image/loading.gif" />',
       css: {
         zIndex: "10011",
-        padding: "10px",
+        padding: "1px",
         left: "50%",
-        width: "80px",
+        width: "110px",
         marginLeft: "-40px",
       }
     });

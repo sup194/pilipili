@@ -2,8 +2,9 @@ package com.pilipili.server.enums;
 
 public enum VideoStatusEnum {
 
-    PUBLISH("P", "发布"),
-    DRAFT("D", "草稿");
+    REVIEW("R", "审核中"),
+    PASS("P", "通过"),
+    OVERRULE("O", "驳回");
 
     private String code;
 
