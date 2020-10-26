@@ -1,5 +1,8 @@
-package com.pilipili.server.dto;
+package com.pilipili.server.vo;
 
+import com.pilipili.server.dto.CategoryDto;
+import com.pilipili.server.dto.CommentDto;
+import com.pilipili.server.dto.UserDto;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -10,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class VideoDto implements Serializable {
+public class VideoVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -97,5 +100,7 @@ public class VideoDto implements Serializable {
      */
     private Integer playback;
 
+    private List<CommentDto> comments;
 
+    private UserDto userDto;
 }

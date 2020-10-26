@@ -35,8 +35,4 @@ public class UserDto {
      */
     private String avatar;
 
-    /**
-     * 密码
-     */
-    private String password;
 }

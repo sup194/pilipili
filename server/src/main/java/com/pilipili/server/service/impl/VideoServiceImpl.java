@@ -7,17 +7,12 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.CategoryDto;
 import com.pilipili.server.dto.CommentDto;
+import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.dto.VideoDto;
-import com.pilipili.server.entity.Category;
-import com.pilipili.server.entity.Comment;
-import com.pilipili.server.entity.Video;
-import com.pilipili.server.entity.VideoCategory;
+import com.pilipili.server.entity.*;
 import com.pilipili.server.enums.VideoStatusEnum;
 import com.pilipili.server.mapper.VideoMapper;
-import com.pilipili.server.service.CategoryService;
-import com.pilipili.server.service.CommentService;
-import com.pilipili.server.service.VideoCategoryService;
-import com.pilipili.server.service.VideoService;
+import com.pilipili.server.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.UuidUtil;
@@ -25,6 +20,8 @@ import com.pilipili.server.vo.VideoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,18 +41,24 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Autowired
     private VideoCategoryService videoCategoryService;
 
-    @Autowired
-    private CategoryService categoryService;
 
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private UserService userService;
 
 
+    @Override
     public IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order) {
+        QueryWrapper<VideoDto> wrapper = new QueryWrapper<VideoDto>()
+                .eq(categoryId != null, "category_id", categoryId)
+                .eq(userId != null, "user_id", userId)
+                .eq(status != null, "status", status)
+                .orderByDesc(order != null, order);
 
-        return videoMapper.selectHotStudyVideos(page, new QueryWrapper<VideoDto>()
-                .eq("status", "P").orderByDesc("play_volume"));
+
+        return videoMapper.selectVideoes(page,wrapper);
     }
 
     @Override
@@ -73,11 +76,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public void mySave(VideoDto videoDto) {
 
         List<CategoryDto> categories = videoDto.getCategories();
-        CategoryDto categoryDto = categories.get(1);
+        CategoryDto categoryDto = categories.get(0);
         String uuid = UuidUtil.getShortUuid();
 
-        Category category = categoryService.getById(categoryDto.getId());
-        String sign = (category.getParent() == "00000100") ? "E" : "S";
+        String sign = (categoryDto.getId().equals("00000100")) ? "E" : "S";
         videoDto.setSign(sign);
         videoDto.setPlayback(0);
 
@@ -109,7 +111,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public VideoVo findVideoById(String id) {
 
         Video video = videoMapper.selectById(id);
-        if (video == null || !VideoStatusEnum.PUBLISH.getCode().equals(video.getStatus())) {
+        if (video == null || !VideoStatusEnum.PASS.getCode().equals(video.getStatus())) {
             return null;
         }
         video.setPlayback(video.getPlayback() + 1);
@@ -128,6 +130,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 comments.add(commentDto);
             }
         }
+
+        // 查询用户
+        User user = userService.getById(video.getUserId());
+        UserDto userDto = CopyUtil.copy(user, UserDto.class);
+        videoVo.setUserDto(userDto);
+
+
         videoVo.setComments(comments);
 
         return videoVo;

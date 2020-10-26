@@ -30,9 +30,8 @@ public class VideoController extends BaseController {
     @GetMapping("/listNew")
     public ResponseDto listNew() {
         Page page = new Page(1, 4);
-        Page pageDta = videoService.page(page, new QueryWrapper<Video>()
-                .eq("status", "P").orderByDesc("created_at"));
-        return ResponseDto.success(pageDta);
+        IPage<VideoDto> pageData = videoService.paging(page, null, null, "P", "created_at");
+        return ResponseDto.success(pageData);
     }
 
     @GetMapping("/hotList")
@@ -64,7 +63,7 @@ public class VideoController extends BaseController {
         return ResponseDto.success();
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseDto findCourse(@PathVariable String id) {
         VideoVo videoVo = videoService.findVideoById(id);
 
