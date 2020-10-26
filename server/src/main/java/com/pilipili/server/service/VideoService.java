@@ -19,7 +19,7 @@ import com.pilipili.server.vo.VideoVo;
 public interface VideoService extends IService<Video> {
 
     IPage<VideoDto> paging(Page page, String categoryId, String userId, String status, String order);
-    IPage<VideoDto> paging(Page page, String status, String sign, String order);
+
     void mySave(VideoDto videoDto);
 
     VideoVo findVideoById(String id);
