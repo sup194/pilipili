@@ -37,7 +37,7 @@ public class VideoController extends BaseController {
     public ResponseDto hotList() {
         Page page = new Page(1, 6);
         IPage<VideoDto> pageData = videoService.paging(page,
-                null, null, "P", "play_volume");
+                null, null, "P", "playback");
         return ResponseDto.success(pageData);
     }
 
@@ -45,7 +45,7 @@ public class VideoController extends BaseController {
     public ResponseDto newStudyList() {
         Page page = new Page(1, 8);
         IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "create_at");
+                "P", "S",  "created_at");
         return ResponseDto.success(pageData);
     }
 
@@ -53,7 +53,7 @@ public class VideoController extends BaseController {
     public ResponseDto newEntertainmentList() {
         Page page = new Page(1, 8);
         IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "E",  "create_at");
+                "P", "E",  "created_at");
         return ResponseDto.success(pageData);
     }
 
@@ -61,7 +61,7 @@ public class VideoController extends BaseController {
     public ResponseDto hotStudyList() {
         Page page = new Page(1, 10);
         IPage<VideoDto> pageData = videoService.paging(page,
-                "P", "S",  "play_volume");
+                "P", "S",  "playback");
         return ResponseDto.success(pageData);
     }
 
