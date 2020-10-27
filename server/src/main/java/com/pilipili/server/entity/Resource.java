@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
  * 资源
  * </p>
  *
- * @author 
- * @since 2020-10-19
+ * @author sup194
+ * @since 2020-10-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -42,6 +42,5 @@ public class Resource implements Serializable {
      * 父id
      */
     private String parent;
-
 
 }

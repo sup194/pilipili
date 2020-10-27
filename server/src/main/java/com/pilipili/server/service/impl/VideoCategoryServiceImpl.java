@@ -1,13 +1,12 @@
 package com.pilipili.server.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.pilipili.server.dto.VideoDto;
-import com.pilipili.server.entity.Category;
-import com.pilipili.server.entity.Video_Category;
-import com.pilipili.server.mapper.Video_CategoryMapper;
-import com.pilipili.server.service.Video_CategoryService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.pilipili.server.dto.CategoryDto;
+import com.pilipili.server.entity.VideoCategory;
+import com.pilipili.server.mapper.VideoCategoryMapper;
+import com.pilipili.server.service.VideoCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,16 +17,20 @@ import java.util.List;
  * 视频分类 服务实现类
  * </p>
  *
- * @author sup
- * @since 2020-09-24
+ * @author sup194
+ * @since 2020-10-22
  */
 @Service
-public class VideoCategoryServiceImpl extends ServiceImpl<Video_CategoryMapper, Video_Category> implements Video_CategoryService {
+public class VideoCategoryServiceImpl extends ServiceImpl<VideoCategoryMapper, VideoCategory> implements VideoCategoryService {
 
     @Resource
-    Video_CategoryMapper video_categoryMapper;
+    private VideoCategoryMapper videoCategoryMapper;
 
 
+    @Override
+    public List<CategoryDto> listByVideoId(QueryWrapper<CategoryDto> wrapper) {
+        return videoCategoryMapper.listByVideoId(wrapper);
+    }
     @Override
     public IPage<VideoDto> QueryVideoByCategoryID(Page page, String category_id) {
         return video_categoryMapper.QueryVideoByCategoryID(page,category_id);

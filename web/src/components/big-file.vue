@@ -1,10 +1,9 @@
 <template>
   <div>
-    <button type="button" v-on:click="selectFile()" class="btn btn-white btn-default btn-round">
-      <i class="ace-icon fa fa-upload"></i>
+    <button type="button" v-on:click="selectFile()" class="btn btn-primary btn-sm">
       {{text}}
     </button>
-    <input class="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
+    <input style="display: none" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
   </div>
 </template>
 
@@ -25,7 +24,7 @@
         default: ""
       },
       shardSize: {
-        default: 50 * 1024
+        default: 30 * 1024 * 1024
       },
       url: {
         default: "oss-append"
@@ -43,6 +42,7 @@
     methods: {
       uploadFile() {
         let _this = this;
+        console.log("上传文件开始");
         let formData = new window.FormData;
         let file = _this.$refs.file.files[0];
 
@@ -94,7 +94,7 @@
        */
       check(param) {
         let _this = this;
-        _this.$ajax.get('http://localhost:9000/file/admin/check/' + param.key).then((response) => {
+        _this.$ajax.get('http://127.0.0.1:9000/file/admin/check/' + param.key).then((response) => {
           let resp = response.data;
           if (resp.success) {
             let obj = resp.content;

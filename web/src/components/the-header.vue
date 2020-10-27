@@ -101,40 +101,62 @@
           <!-- 模态框主体 -->
           <div class="modal-body" style="padding: 2rem">
             <form class="form-horizontal">
-              <div class="form-group">
-                <label>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
                   分类
                 </label>
-                <div>
+                <div class="col-sm-9">
                   <ul id="tree" class="ztree"></ul>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label">视频上传</label>&nbsp;&nbsp;
-                <input type="file">
+              <div class="form-group row">
+                <label class="control-label col-md-2">封面</label>
+                <div class="col-md-10">
+                  <big-file v-bind:input-id="'image-upload'"
+                            v-bind:text="'点击上传'"
+                            v-bind:use="'C'"
+                            v-bind:suffixs="['jpg', 'jpeg', 'png']"
+                            v-bind:after-upload="afterUpload1"></big-file>
+                  <div v-show="video.image">
+                    <div class="col-md-10">
+                      <img v-bind:src="video.image"  class="img-responsive">
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="control-label">封面</label>&nbsp;&nbsp;
-                <input type="file">
+              <div class="form-group row">
+                <label class="control-label col-sm-2">视频</label>
+                <div  class="col-md-10">
+                  <big-file v-bind:input-id="'video-upload'"
+                            v-bind:text="'点击上传'"
+                            v-bind:use="'S'"
+                            v-bind:suffixs="['mp4']"
+                            v-bind:after-upload="afterUpload2"></big-file>
+                  <div v-show="video.url" class="row">
+                    <div class="col-md-10">
+                      <video v-bind:src="video.url" id="video" controls="controls"></video>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label>标题</label>
-                <input type="text" class="form-control" placeholder="">
+                <input v-model="video.name" type="text" class="form-control" placeholder="">
               </div>
               <div class="form-group">
                 <label>简介</label>
-                <textarea class="form-control"></textarea>
+                <textarea v-model="video.summary" class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <label>时长</label>
-                <input type="text" class="form-control" readonly="readonly">
+                <input v-model="video.time" type="text" class="form-control" readonly="readonly">
               </div>
             </form>
           </div>
 
           <!-- 模态框底部 -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="contributionBtn">立即投稿</button>
+            <button type="button" class="btn btn-secondary" id="contributionBtn" v-on:click="contribution()">立即投稿</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
           </div>
 
@@ -159,19 +181,71 @@
 
   });
 
+  import BigFile from '../components/big-file.vue'
+
   export default {
     name: 'theHeader',
-    components: {},
+    components: {BigFile},
     data: function () {
       return {
-        loginMember: {}
+        loginMember: {},
+        video: {},
+        categories: [],
+        tree: {},
       }
     },
     mounted() {
       let _this = this;
       _this.loginMember = Tool.getLoginMember();
+      _this.allCategory();
     },
     methods: {
+
+      /**
+       * 点击【保存】
+       */
+      contribution(page) {
+        let _this = this;
+
+        let loginMember = Tool.getLoginMember();
+        if (Tool.isEmpty(loginMember)) {
+          toast.warning("登录之后才可以投稿哦~");
+          return;
+        }
+
+        // 保存校验
+        if (1 != 1
+            || !Validator.require(_this.video.name, "标题")
+            || !Validator.length(_this.video.name, "名称", 1, 50)
+            || !Validator.length(_this.video.summary, "概述", 1, 200)
+            || !Validator.length(_this.video.image, "封面", 1, 100)
+            || !Validator.length(_this.video.video, "视频", 1, 200)
+        ) {
+          return;
+        }
+
+        let categories = _this.tree.getCheckedNodes();
+        if (Tool.isEmpty(categories)) {
+          toast.warning("请选择分类！");
+          return;
+        }
+        _this.video.categories = categories;
+        _this.video.userId = _this.loginMember.id;
+        console.log(categories);
+
+        Loading.show();
+        _this.$ajax.post('http://localhost:9000/business/web/video/contribution', _this.video).then((response)=>{
+          Loading.hide();
+          let resp = response.data;
+          if (resp.success) {
+            $('#contributionModal').modal('hide');
+            $('.modal-backdrop').remove();
+            toast.success("投稿成功！等待管理员审核！");
+          } else {
+            toast.warning(resp.message)
+          }
+        })
+      },
 
       setLoginMember(loginMember) {
         let _this = this;
@@ -191,6 +265,66 @@
             toast.warning(resp.message);
           }
         });
+      },
+
+      afterUpload1(resp) {
+        let _this = this;
+        let image = resp.content.path;
+        _this.video.image = image;
+      },
+
+      afterUpload2(resp) {
+        let _this = this;
+        let url = resp.content.path;
+        _this.video.url = url;
+        _this.getTime();
+      },
+
+      allCategory() {
+        let _this = this;
+        // Loading.show();
+        _this.$ajax.get('http://localhost:9000/business/web/category/all').then((response)=>{
+          // Loading.hide();
+          let resp = response.data;
+          _this.categories = resp.content;
+          console.log("获取全部分类");
+          _this.initTree();
+        })
+      },
+
+      initTree() {
+        let _this = this;
+        let setting = {
+          check: {
+            enable: true
+          },
+          data: {
+            simpleData: {
+              idKey: "id",
+              pIdKey: "parent",
+              rootPId: "00000000",
+              enable: true
+            }
+          }
+        };
+
+        let zNodes = _this.categories;
+
+        _this.tree = $.fn.zTree.init($("#tree"), setting, zNodes);
+
+        // 展开所有的节点
+        // _this.tree.expandAll(true);
+      },
+
+      /**
+       * 获取时长
+       */
+      getTime() {
+        let _this = this;
+        setTimeout(function () {
+          let ele = document.getElementById("video");
+          _this.video.time = parseInt(ele.duration, 10);
+        }, 12000);
       },
 
     }
@@ -300,5 +434,18 @@
     top: 0.5rem;
     right: -0.5rem;
     z-index: 10;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
   }
 </style>

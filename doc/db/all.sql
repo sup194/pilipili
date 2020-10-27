@@ -31,24 +31,46 @@ CREATE TABLE `videoCategory`
 ) engine = innodb
   default charset = utf8mb4 COMMENT = '分类';
 
+INSERT INTO `category` VALUES ('00000100', '00000000', '娱乐', 100);
+INSERT INTO `category` VALUES ('00000101', '00000100', '动画', 101);
+INSERT INTO `category` VALUES ('00000102', '00000100', '音乐', 102);
+INSERT INTO `category` VALUES ('00000103', '00000100', '生活', 103);
+INSERT INTO `category` VALUES ('00000104', '00000100', '时尚', 104);
+INSERT INTO `category` VALUES ('00000105', '00000100', '电影', 105);
+INSERT INTO `category` VALUES ('00000106', '00000100', '美食', 106);
+INSERT INTO `category` VALUES ('00000107', '00000100', '搞笑', 107);
+INSERT INTO `category` VALUES ('00000108', '00000100', '游戏', 108);
+INSERT INTO `category` VALUES ('00000200', '00000000', '学习', 200);
+INSERT INTO `category` VALUES ('00000201', '00000200', '数码', 201);
+INSERT INTO `category` VALUES ('00000202', '00000200', '编程', 202);
+INSERT INTO `category` VALUES ('00000203', '00000200', '绘画', 203);
+INSERT INTO `category` VALUES ('00000204', '00000200', '外语', 204);
+INSERT INTO `category` VALUES ('00000205', '00000200', '设计', 205);
+INSERT INTO `category` VALUES ('00000206', '00000200', '心理', 206);
+INSERT INTO `category` VALUES ('00000207', '00000200', '百科', 207);
+INSERT INTO `category` VALUES ('00000208', '00000200', '摄影', 208);
+
 -- ----------------------------
 -- Table structure for file
 -- ----------------------------
 DROP TABLE IF EXISTS `file`;
-CREATE TABLE `file`
-(
-    `id`         char(8)      NOT NULL DEFAULT '' COMMENT 'id',
-    `path`       varchar(100) NOT NULL COMMENT '相对路径',
-    `name`       varchar(100) NULL     DEFAULT NULL COMMENT '文件名',
-    `suffix`     varchar(10)  NULL     DEFAULT NULL COMMENT '后缀',
-    `size`       int          NULL     DEFAULT NULL COMMENT '大小|字节B',
-    `use`        char(1)      NULL     DEFAULT NULL COMMENT '用途|枚举[FileUseEnum]：STUDY(\"S\", \"学习\"), ENTERTAINMENT(\"E\", \"娱乐\")',
-    `created_at` datetime(3)  NULL     DEFAULT NULL COMMENT '创建时间',
-    `updated_at` datetime(3)  NULL     DEFAULT NULL COMMENT '修改时间',
-    PRIMARY KEY (`id`) USING BTREE,
-    UNIQUE INDEX `path_unique` (`path`) USING BTREE
-) engine = innodb
-  default charset = utf8mb4 COMMENT = '文件';
+CREATE TABLE `file`  (
+  `id` char(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'id',
+  `path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '相对路径',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件名',
+  `suffix` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '后缀',
+  `size` int(11) NULL DEFAULT NULL COMMENT '大小|字节B',
+  `use` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用途|枚举[FileUseEnum]：STUDY(\"S\", \"学习\"), ENTERTAINMENT(\"E\", \"娱乐\"),COVER(\"C\",\"封面\")',
+  `created_at` datetime(3) NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime(3) NULL DEFAULT NULL COMMENT '修改时间',
+  `shard_index` int(11) NULL DEFAULT NULL COMMENT '已上传分片',
+  `shard_size` int(11) NULL DEFAULT NULL COMMENT '分片大小|B',
+  `shard_total` int(11) NULL DEFAULT NULL COMMENT '分片总数',
+  `key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件标识',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `path_unique`(`path`) USING BTREE,
+  UNIQUE INDEX `key_unique`(`key`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for resource
@@ -114,6 +136,7 @@ CREATE TABLE `user`
     `email`    varchar(50)  NOT NULL COMMENT '邮箱',
     `name`     varchar(50)  NULL     DEFAULT NULL COMMENT '用户名',
     `gender`   char(2)      NULL     DEFAULT NULL COMMENT '性别|枚举[GenderEnum]：MAIE(\"M\",\"男\"),FEMALE(\"F\",\"女\"),SECRET(\"S\",\"保密\")',
+    `role`   char(2)        NOT NULL DEFAULT 'G' COMMENT '角色|枚举[RoleEnum]：ADMIN(\"A\",\"管理员\"),GENERAL(\"G\",\"普通用户\")',
     `sign`     varchar(255) NULL     DEFAULT NULL COMMENT '我的签名',
     `avatar`   varchar(255) NULL     DEFAULT NULL COMMENT '头像',
     `password` char(32)     NOT NULL COMMENT '密码',
@@ -181,3 +204,15 @@ CREATE TABLE `video_playback`
     PRIMARY KEY (`id`) USING BTREE
 ) engine = innodb
   default charset = utf8mb4 COMMENT = '视频播放';
+
+-- 视频评论
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment`
+(
+    `id`          char(8) NOT NULL DEFAULT '' COMMENT 'id',
+    `user_id`    char(8) NULL     DEFAULT NULL COMMENT '用户|user.id',
+    `video_id` char(8) NULL     DEFAULT NULL COMMENT '视频|video.id',
+    `content` varchar(100) NOT NULL     COMMENT '评论内容',
+    PRIMARY KEY (`id`) USING BTREE
+) engine = innodb
+  default charset = utf8mb4 COMMENT = '视频评论';

@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
  * 视频
  * </p>
  *
- * @author 
- * @since 2020-10-19
+ * @author sup194
+ * @since 2020-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -82,7 +82,16 @@ public class Video implements Serializable {
     /**
      * 投稿视频url
      */
-    @NotBlank(message = "视频地址不能为空")
     private String url;
+
+    /**
+     * 标识|枚举[SignEnum]：STUDY("S", "学习"),ENTERTAINMENT("E", "娱乐")
+     */
+    private String sign;
+
+    /**
+     * 播放量
+     */
+    private Integer playback;
 
 }

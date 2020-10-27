@@ -22,7 +22,7 @@
         <input v-on:blur="onRegisterConfirmPasswordBlur()"
                v-bind:class="registerConfirmPasswordValidateClass"
                id="register-confirm-password" v-model="userRegister.confirm"
-               class="form-control" placeholder="确认密码" type="password"/>
+               class="form-control" placeholder="确认密码"  type="password"/>
         <span v-show="registerConfirmPasswordValidate === false" class="text-danger">确认密码和密码一致</span>
         <div class="form-check" style="margin: 0.5rem 0">
           <label class="form-check-label">

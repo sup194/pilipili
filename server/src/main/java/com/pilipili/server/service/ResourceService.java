@@ -11,8 +11,8 @@ import java.util.List;
  * 资源 服务类
  * </p>
  *
- * @author 
- * @since 2020-10-19
+ * @author sup194
+ * @since 2020-10-22
  */
 public interface ResourceService extends IService<Resource> {
 

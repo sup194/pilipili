@@ -6,9 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.Video;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pilipili.server.exception.ValidatorException;
+import com.pilipili.server.util.ValidatorUtil;
+import com.pilipili.server.vo.VideoVo;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -27,28 +28,75 @@ public class VideoController extends BaseController {
      * @return
      */
     @GetMapping("/listNew")
-    public ResponseDto listNew(){
+    public ResponseDto listNew() {
         Page page = new Page(1, 4);
-        Page pageDta = videoService.page(page, new QueryWrapper<Video>()
-                .eq("status", "P").orderByDesc("created_at"));
-        return ResponseDto.success(pageDta);
+        IPage<VideoDto> pageData = videoService.paging(page, null, null, "P", "created_at");
+        return ResponseDto.success(pageData);
     }
 
     @GetMapping("/hotList")
     public ResponseDto hotList() {
         Page page = new Page(1, 6);
         IPage<VideoDto> pageData = videoService.paging(page,
-                null, null, "P", "play_volume");
+                null, null, "P", "playback");
+        return ResponseDto.success(pageData);
+    }
+
+    @GetMapping("/newStudyList")
+    public ResponseDto newStudyList() {
+        Page page = new Page(1, 8);
+
+        IPage<VideoDto> pageData = videoService.paging(page, "S", "P", "created_at");
+
+        return ResponseDto.success(pageData);
+    }
+
+    @GetMapping("/newEntertainmentList")
+    public ResponseDto newEntertainmentList() {
+        Page page = new Page(1, 8);
+        IPage<VideoDto> pageData = videoService.paging(page, "E", "P", "created_at");
+
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/hotStudyList")
     public ResponseDto hotStudyList() {
         Page page = new Page(1, 10);
-        IPage<VideoDto> pageData = videoService.paging(page,
-                null, null, "P", "play_volume");
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "S")
+                .eq("status", "P")
+                .orderByDesc("playback"));
         return ResponseDto.success(pageData);
     }
+
+    @GetMapping("/hotEntertainmentList")
+    public ResponseDto hotEntertainmentList() {
+        Page page = new Page(1, 10);
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
+                .eq("status", "P")
+                .orderByDesc("playback"));
+        return ResponseDto.success(pageData);
+    }
+
+    @PostMapping("/contribution")
+    public ResponseDto contribution(@RequestBody VideoDto videoDto) {
+
+        System.out.println(videoDto);
+        ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(videoDto);
+        if (validResult.hasErrors()) {
+            throw new ValidatorException(validResult.getErrors());
+        }
+        videoService.mySave(videoDto);
+
+        return ResponseDto.success();
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseDto findCourse(@PathVariable String id) {
+        VideoVo videoVo = videoService.findVideoById(id);
+
+        return ResponseDto.success(videoVo);
+    }
+
 
 
 }

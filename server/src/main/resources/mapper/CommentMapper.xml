@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pilipili.server.mapper.CommentMapper">
+
+    <select id="selectByVId" resultType="com.pilipili.server.dto.CommentDto">
+        SELECT
+            c.*,
+            u.id AS userId,
+            u.avatar,
+            u.email,
+            u.gender,
+            u.`name` AS username,
+            u.sign,
+            u.role
+        FROM `comment` c
+        JOIN user u ON c.user_id = u.id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

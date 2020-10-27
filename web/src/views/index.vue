@@ -87,66 +87,18 @@
 
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
-              <router-link to="/detail">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
+
+            <div class="col-sm-4 pili-carousel-item" v-for="(o, index) in hots.slice(0, 6)">
+              <router-link v-bind:to="'/detail?id=' + o.id">
+                <img v-bind:src="o.image"/>
                 <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
+                  <span>{{o.name}}</span><br>
+                  <span>up {{o.username}}</span>
                   <i class="fa fa-play-circle-o"></i>
                 </div>
               </router-link>
             </div>
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item" style="margin: 1rem 0 1.5rem 0">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-4 pili-carousel-item">
-              <a href="#">
-                <img src="/static/image/Snipaste_2020-03-07_09-16-15.png"/>
-                <div class="pili-carousel-mask">
-                  <span>史尔特尔还是史特尔特？薄绿的技能叫抽水马桶？</span><br>
-                  <span>up 少年api</span>
-                  <i class="fa fa-play-circle-o"></i>
-                </div>
-              </a>
-            </div>
+
           </div>
         </div>
       </div>
@@ -159,34 +111,15 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="row pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
+
+              <div class="col-sm-3" v-for="(o, index) in news.slice(0, 4)">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image"/>
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/Snipaste_2020-08-03_20-52-55.png"/>
-                  <p>就TM你喜欢当No.1啊？【DIO与奇妙的JOJO们（第二弹）】</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>回京展现</a>
-              </div>
+
             </div>
           </div>
 
@@ -208,62 +141,15 @@
             <span class="video-list-btn" style="margin-right: 1rem"><i
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
+
+              <div class="col-sm-3" v-for="o in entertainmentNews.slice(0, 8)">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image"/>
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.userId}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -272,16 +158,9 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p><span>1</span> <a href="#">跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>2</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>3</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>4</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>5</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>6</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>7</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>8</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>9</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>10</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
+              <p v-for="(o, index) in entertainmentHots.slice(0, 10)"><span>{{index}}</span>
+                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+              </p>
             </div>
           </div>
         </div>
@@ -297,62 +176,15 @@
             <span class="video-list-btn" style="margin-right: 1rem"><i
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
+
+              <div class="col-sm-3" v-for="o in studyNews.slice(0, 8)">
+                <router-link v-bind:to="'/detail?id=' + o.id">
+                  <img v-bind:src="o.image"/>
+                  <p>{{o.name}}</p>
+                </router-link>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="/static/image/2019-01-03%20155744.jpg"/>
-                  <p>《童年回忆》拥有魔兽的声线是什么体验 6</p>
-                </a>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>怪物彼岸花</a>
-              </div>
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -361,16 +193,11 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p><span>1</span> <a href="#">跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>2</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>3</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>4</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>5</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>6</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>7</span> <a href="#"> 跨次元无缝衔接！看完之后世界都惊呆了！</a></p>
-              <p><span>8</span> <a href="#"> 蝎子精：“住在山里真不错！”</a></p>
-              <p><span>9</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
-              <p><span>10</span> <a href="#"> 天庭不许Rap！快去请Rap之祖！</a></p>
+
+              <p v-for="(o, index) in studyHots.slice(0, 10)"><span>{{index}}</span>
+                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+              </p>
+
             </div>
           </div>
         </div>
@@ -397,12 +224,101 @@
   export default {
     name: 'index',
     data: function () {
-      return {}
+      return {
+        news: [],
+        hots: [],
+        studyHots: [],
+        entertainmentHots: [],
+        studyNews: [],
+        entertainmentNews: [],
+      }
     },
+
     mounted() {
       let _this = this;
+      _this.listNew();
+      _this.listHot();
+      _this.listEntertainmentHots();
+      _this.listEntertainmentNews();
+      _this.listStudyNews();
+      _this.listStudyHots();
     },
-    methods: {}
+
+    methods: {
+
+      listNew() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/listNew').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.news = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listHot() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.hots = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listStudyHots() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotStudyList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.studyHots = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listEntertainmentHots() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotEntertainmentList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.entertainmentHots = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listStudyNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newStudyList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.studyNews = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listEntertainmentNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newEntertainmentList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.entertainmentNews = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+    }
   }
 </script>
 
@@ -470,6 +386,8 @@
 
   .pili-video-list img {
     width: 100%;
+    height: 110px;
+    border-radius: 4px;
   }
 
   .pili-video-list span {
@@ -498,13 +416,17 @@
     width: 85%;
     bottom: 0;
     display: none;
+    border-radius: 4px;
     padding: 0.2rem;
     background: rgba(47, 13, 26, 0.9);
   }
 
   .pili-carousel-item {
     position: relative;
+  }
 
+  .pili-carousel-item:nth-child(-n+3) {
+    margin-bottom: 0.9rem;
   }
 
   .pili-carousel-item div span {
@@ -514,7 +436,8 @@
 
   .pili-carousel-list img {
     width: 100%;
-    height: 100%;
+    height: 110px;
+    border-radius: 4px;
   }
 
   .pili-carousel-mask i {

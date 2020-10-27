@@ -7,7 +7,7 @@ spring:
       max-request-size: 50MB
 file:
   path: E:/file/pilipili/
-  domain:
+  domain: http://127.0.0.1:9000/file/f/
 server:
   port: 9004
   servlet:
@@ -19,6 +19,6 @@ eureka:
 oss:
   accessKeyId: LTAI4FyRfMYtnQpHuXao58CE
   accessKeySecret: KPILKCpx5AvxOZI7wWX8RkCh5qx0v6
-  endpoint: http://oss-cn-guangzhou.aliyuncs.com
-  domain: http://online-pilipili.oss-cn-guangzhou.aliyuncs.com
+  endpoint: https://oss-cn-guangzhou.aliyuncs.com
+  domain: https://online-pilipili.oss-cn-guangzhou.aliyuncs.com/
   bucket: online-pilipili

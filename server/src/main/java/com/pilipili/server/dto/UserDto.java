@@ -2,13 +2,17 @@ package com.pilipili.server.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserDto {
+public class UserDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * id
      */
-    private String id;
+    private String UserId;
 
     /**
      * 邮箱
@@ -18,7 +22,7 @@ public class UserDto {
     /**
      * 用户名
      */
-    private String name;
+    private String username;
 
     /**
      * 用途|枚举[GenderEnum]：MAlE("M","男"),FEMALE("F","女"),SECRET("S","保密")
@@ -36,7 +40,8 @@ public class UserDto {
     private String avatar;
 
     /**
-     * 密码
+     * 角色
      */
-    private String password;
+    private String role;
+
 }

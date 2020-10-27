@@ -1,18 +1,14 @@
 package com.pilipili.system.controller.admin;
 
-import com.pilipili.server.dto.ResourceDto;
-import com.pilipili.server.dto.ResponseDto;
-import com.pilipili.server.exception.ValidatorException;
-import com.pilipili.server.util.ValidatorUtil;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
+import com.pilipili.server.entity.Resource;
+import com.pilipili.server.service.ResourceService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.pilipili.server.service.ResourceService;
-import com.pilipili.server.entity.Resource;
+import com.pilipili.server.service.RoleResourceService;
+import com.pilipili.server.entity.RoleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
