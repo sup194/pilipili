@@ -99,6 +99,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             return null;
         }
         video.setPlayback(video.getPlayback() + 1);
+        this.saveOrUpdate(video);
         VideoVo videoVo = CopyUtil.copy(video, VideoVo.class);
 
         //  查询分类
@@ -126,6 +127,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public IPage<VideoDto> paging(Page page, String sign, String status, String order) {
         return videoMapper.selectNewList(page, new QueryWrapper<VideoDto>()
-                .eq("sign", sign).eq("status", status).orderByDesc(order));
+                .eq("v.sign", sign).eq("v.status", status).orderByDesc(order));
     }
 }

@@ -22,24 +22,24 @@
         </div>
         <div class="col-sm-8" style="border-right: solid 1px #E7E7E7">
           <ul class="pili-category-ul" style="margin-bottom: 2rem">
-            <a href="#">动画&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">音乐&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">生活&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">时尚&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">电影&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">美食&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">搞笑&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">游戏&nbsp;<span class="badge badge-secondary">15</span></a>
+            <a href="#">动画&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">音乐&nbsp;<span class="badge badge-secondary">3</span></a>
+            <a href="#">生活&nbsp;<span class="badge badge-secondary">1</span></a>
+            <a href="#">时尚&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">电影&nbsp;<span class="badge badge-secondary">0</span></a>
+            <a href="#">美食&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">搞笑&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">游戏&nbsp;<span class="badge badge-secondary">0</span></a>
           </ul>
           <ul class="pili-category-ul">
-            <a href="#">数码&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">编程&nbsp;<span class="badge badge-secondary">125</span></a>
-            <a href="#">绘画&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">外语&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">设计&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">心理&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">百科&nbsp;<span class="badge badge-secondary">15</span></a>
-            <a href="#">摄影&nbsp;<span class="badge badge-secondary">15</span></a>
+            <a href="#">数码&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">编程&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">绘画&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">外语&nbsp;<span class="badge badge-secondary">2</span></a>
+            <a href="#">设计&nbsp;<span class="badge badge-secondary">0</span></a>
+            <a href="#">心理&nbsp;<span class="badge badge-secondary">0</span></a>
+            <a href="#">百科&nbsp;<span class="badge badge-secondary">4</span></a>
+            <a href="#">摄影&nbsp;<span class="badge badge-secondary">1</span></a>
           </ul>
         </div>
         <div class="col-sm-3" style="z-index: -2">
@@ -147,7 +147,7 @@
                   <img v-bind:src="o.image"/>
                   <p>{{o.name}}</p>
                 </router-link>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.userId}}</a>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
               </div>
 
             </div>
@@ -158,7 +158,7 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p v-for="(o, index) in entertainmentHots.slice(0, 11)"><span>{{index}}</span>
+              <p v-for="(o, index) in entertainmentHots.slice(0, 11)"><span>{{index+1}}</span>
                 <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
               </p>
             </div>
@@ -194,7 +194,7 @@
             </div>
             <div class="pili-fun-rank">
 
-              <p v-for="(o, index) in studyHots.slice(0, 11)"><span>{{index}}</span>
+              <p v-for="(o, index) in studyHots.slice(0, 11)"><span>{{index+1}}</span>
                 <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
               </p>
 
@@ -208,18 +208,6 @@
 </template>
 
 <script>
-
-  $(document).ready(function () {
-
-    $(".pili-carousel-item").mouseover(function () {
-      $(this).find(".pili-carousel-mask").show();
-    });
-
-    $(".pili-carousel-item").mouseout(function () {
-      $(this).find(".pili-carousel-mask").hide();
-    })
-
-  });
 
   export default {
     name: 'index',
@@ -320,6 +308,19 @@
 
     }
   }
+
+  $(document).ready(function () {
+
+    $(".pili-carousel-item").mouseover(function () {
+      $(this).find(".pili-carousel-mask").show();
+    });
+
+    $(".pili-carousel-item").mouseout(function () {
+      $(this).find(".pili-carousel-mask").hide();
+    })
+
+  });
+
 </script>
 
 <style>

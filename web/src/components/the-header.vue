@@ -47,22 +47,22 @@
                 <img v-show="loginMember.avatar" v-bind:src="loginMember.avatar" class="avatar-img"/>
               <div class="user-info">
                 <p style=" color: #FB7299; font-weight: bold; margin-bottom: -0.3rem">{{loginMember.name}}</p>
-                <span class="badge badge-secondary" style="background-color: #FB7299; font-size: 0.6rem">管理员</span>
+                <span class="badge badge-secondary" style="background-color: #FB7299; font-size: 0.6rem">{{USER_ROLE | optionKV(loginMember.role)}}</span>
                 <hr>
                 <ul class="user-info-ul">
                   <router-link to="/contribution" target="_blank">
                     <div style="margin-right: 1rem">
                       <span>投稿</span>
-                      <p>8</p>
+                      <p>20</p>
                     </div>
                   </router-link>
                   <div>
                     <span>粉丝</span>
-                    <p>41</p>
+                    <p>0</p>
                   </div>
                   <div>
                     <span>关注</span>
-                    <p>141</p>
+                    <p>0</p>
                   </div>
                 </ul>
                 <hr>
@@ -192,6 +192,7 @@
         video: {},
         categories: [],
         tree: {},
+        USER_ROLE: USER_ROLE,
       }
     },
     mounted() {

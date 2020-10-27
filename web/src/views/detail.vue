@@ -126,105 +126,19 @@
           </div>
 
           <div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg" width="100%"
+
+            <div style="height: 98px" v-for="o in recommendList">
+              <div style="width: 45%; float: left;" >
+                <img v-bind:src="o.image" width="100%"
                      height="90"/>
               </div>
               <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【LOL动画】可爱娜美的水中鱼人舞</a>
-                <span>怎么都能钩中你</span><br>
-                <span>7.8万 播放 · 69 评论</span>
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">{{o.name}}</router-link>
+                <span>{{o.username}}</span><br>
+                <span>{{o.playback}} 播放 · 69 评论</span>
               </div>
             </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">森破生日垫底，所以flamie，你能替他道个歉么？</a>
-                <span>糟糕的婚礼</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【游戏推荐】【免费游戏】Steam上7款超好玩的免费游戏！ #1</a>
-                <span>pic-米粉</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【LOL动画】可爱娜美的水中鱼人舞</a>
-                <span>怎么都能钩中你</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">森破生日垫底，所以flamie，你能替他道个歉么？</a>
-                <span>糟糕的婚礼</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【游戏推荐】【免费游戏】Steam上7款超好玩的免费游戏！ #1</a>
-                <span>pic-米粉</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【LOL动画】可爱娜美的水中鱼人舞</a>
-                <span>怎么都能钩中你</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">森破生日垫底，所以flamie，你能替他道个歉么？</a>
-                <span>糟糕的婚礼</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
-            <div style="height: 98px">
-              <div style="width: 45%; float: left;">
-                <img src="https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg" width="100%"
-                     height="90"/>
-              </div>
-              <div style="float: right; width: 53%" class="pili-rec-info">
-                <a href="#">【游戏推荐】【免费游戏】Steam上7款超好玩的免费游戏！ #1</a>
-                <span>pic-米粉</span><br>
-                <span>7.8万 播放 · 69 评论</span>
-              </div>
-            </div>
+
           </div>
 
         </div>
@@ -242,6 +156,7 @@
         video: {},
         user: {},
         comments: [],
+        recommendList: [],
         loginMember: {},
         playerOptions: {
           playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
@@ -286,6 +201,35 @@
           _this.user = _this.video.userDto || {};
           _this.playerOptions.sources[0].src = _this.video.url;
           _this.playerOptions.poster = _this.video.image;
+          if (_this.video.categories[0].parent === "00000100") {
+            _this.listEntertainmentNews();
+          } else {
+            _this.listStudyNews();
+          }
+        })
+      },
+
+      listStudyNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newStudyList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.recommendList = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listEntertainmentNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newEntertainmentList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.recommendList = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
         })
       },
 
