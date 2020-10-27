@@ -24,7 +24,7 @@
           <hr>
           <div>
             <div style="float: left; padding: 5px 20px">
-              <img v-bind:src="loginMember.image" width="48" height="48" style="border-radius: 50%">
+              <img v-bind:src="loginMember.avatar" width="48" height="48" style="border-radius: 50%">
             </div>
             <div style="width: 77%; float: left">
               <textarea v-model="comment.content" class="form-control" rows="3" placeholder="发条友善的评论" style="font-size: 12px; color: #555;"></textarea>
@@ -41,68 +41,11 @@
           <div class="pili-comment-list">
 
             <div class="pili-comment-list-item" v-for="o in comments">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img v-bind:src="o.userDto.avatar" width="48"
+              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/avatar.jpg" width="48"
                                                                       height="48"/></div>
               <div style="float: left; width: 80%">
-                <a>{{o.userDto.username}}</a><br>
+                <a>{{o.userId}}</a><br>
                 <span>{{o.content}}</span>
-                <p>2020-10-05 09:10:48</p>
-                <div style="width: 111%; padding-bottom: 1rem">
-                  <hr>
-                </div>
-              </div>
-            </div>
-
-            <div class="pili-comment-list-item">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
-                                                                      height="48"/></div>
-              <div style="float: left; width: 80%">
-                <a>纯粹的电竞少年</a><br>
-                <span>你好up，我一直有个疑问，现在神装分为了传说和神话，那么奥恩怎么办呢？比如日炎是传说，可以升级为神话，那怎么升级？是升级传说，还是升级神话呢？升级了之后算什么装备呢？</span>
-                <p>2020-10-05 09:10:48</p>
-                <div style="width: 111%; padding-bottom: 1rem">
-                  <hr>
-                </div>
-              </div>
-            </div>
-            <div class="pili-comment-list-item">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
-                                                                      height="48"/></div>
-              <div style="float: left; width: 80%">
-                <a>一头猪罢了</a><br>
-                <span>看了这么多期，新版本的装备有个很大的问题，就是附加能力太强了。
-现版本装备大多数附加属性都只有部分核心，比如科技枪的回血，无尽的暴击伤害，死亡之舞的回血，黑切的减甲。
-其他常见效果都是常规属性，比如法强，CD，攻击力，攻速这种。
-现在只要一个人领先一件装备，它附带的属性：隐身，破防，位移，回复，日炎+普攻减速，减速+禁锢，基本上抵得上两个基本技能的作用，而且是完全的质变。
-和当初幕刃刚出附加固定伤害没削的时候一样，领先幕刃就是秒杀。
-这种情况就会导致，只要一条路被滚雪球了，其他路的人没有成型装，那游戏体验就是见面死。
-举例子说的话，就像是魔兽世界和DNF，曾经大家都出散件，比的是属性，技术能弥补属性差距。
-而现在每个人都要去追求更适合本职业的“套装效果”带来的附加能力，因为装备质变能减少英雄本身技能强度差距，而且更难用操作弥补。
-比如你玩个寒冰，我加上套装有三个位移能贴脸，那么在没有对应套装的情况下，你就是无法反抗，闪现大招风筝全都无用，装备效果就是碾压。</span>
-                <p>2020-10-05 09:10:48</p>
-                <div style="width: 111%; padding-bottom: 1rem">
-                  <hr>
-                </div>
-              </div>
-            </div>
-            <div class="pili-comment-list-item">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
-                                                                      height="48"/></div>
-              <div style="float: left; width: 80%">
-                <a>落空城6</a><br>
-                <span>好装备太多不好选择啊</span>
-                <p>2020-10-05 09:10:48</p>
-                <div style="width: 111%; padding-bottom: 1rem">
-                  <hr>
-                </div>
-              </div>
-            </div>
-            <div class="pili-comment-list-item">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
-                                                                      height="48"/></div>
-              <div style="float: left; width: 80%">
-                <a>不能吃的知了</a><br>
-                <span>是不是觉得最近的版本刺客上场率太低，这些装备从保命能力到机动能力到伤害能力都有很大提升，感觉有些加强ad的装备都可以给刺客用。这个版本唯一不友好的只有坦克了吧，加强了伤害和aoe就是没有肉，还有那么多穿甲装。</span>
                 <p>2020-10-05 09:10:48</p>
                 <div style="width: 111%; padding-bottom: 1rem">
                   <hr>
@@ -237,9 +180,10 @@
 
       findComment() {
         let _this = this;
-        _this.$ajax.get('http://localhost:9000/business/web/comment/list/' + _this.id).then((response) => {
-          let resp = response.data;
-          _this.comments = resp.comments;
+          _this.$ajax.get('http://localhost:9000/business/web/comment/list/' + _this.id).then((response) => {
+          let resp = response.data.content;
+          _this.comments = resp.records;
+          console.log(_this.comments);
         })
       },
 
@@ -247,9 +191,15 @@
         let _this = this;
         _this.comment.userId = Tool.getLoginMember().id;
         _this.comment.videoId = _this.video.id;
-        _this.$ajax.get('http://localhost:9000/business/web/comment/add/' + _this.comment).then((response) => {
+        _this.$ajax.post('http://localhost:9000/business/web/comment/add', _this.comment).then((response) => {
           let resp = response.data;
-          _this.comments = resp.comments;
+          if (resp.success) {
+            toast.success("发表评论成功！");
+            _this.comment.content = "";
+            _this.findComment();
+          } else {
+            toast.warning(resp.message)
+          }
         })
       },
 

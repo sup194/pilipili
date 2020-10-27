@@ -1,6 +1,8 @@
 package com.pilipili.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
@@ -37,5 +39,10 @@ public class Comment implements Serializable {
      * 评论内容
      */
     private String content;
+
+    /**
+     * 创建时间
+     */
+    private Date createdAt;
 
 }

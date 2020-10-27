@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -46,6 +47,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         String shortUuid = UuidUtil.getShortUuid();
         commentDto.setId(shortUuid);
         Comment comment = CopyUtil.copy(commentDto, Comment.class);
+        comment.setCreatedAt(new Date());
         this.save(comment);
 
     }
