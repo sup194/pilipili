@@ -107,18 +107,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
 
         // 查询用户
-        User user = userService.getById(video.getUserId());
-        UserDto userDto = new UserDto();
-        userDto.setUserId(user.getId());
-        userDto.setAvatar(user.getAvatar());
-        userDto.setEmail(user.getEmail());
-        userDto.setGender(user.getGender());
-        userDto.setSign(user.getSign());
-        userDto.setRole(user.getRole());
-        userDto.setUsername(user.getName());
-
+        UserDto userDto = userService.getByUserId(video.getUserId());
         videoVo.setUserDto(userDto);
-
 
         return videoVo;
     }
@@ -126,6 +116,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public IPage<VideoDto> paging(Page page, String sign, String status, String order) {
         return videoMapper.selectNewList(page, new QueryWrapper<VideoDto>()
-                .eq("sign", sign).eq("status", status).orderByDesc(order));
+                .eq("v.sign", sign).eq("v.status", status).orderByDesc(order));
     }
 }

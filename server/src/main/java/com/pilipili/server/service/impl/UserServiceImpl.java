@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pilipili.server.dto.LoginDto;
 import com.pilipili.server.dto.LoginUserDto;
 import com.pilipili.server.dto.ResponseDto;
+import com.pilipili.server.dto.UserDto;
 import com.pilipili.server.entity.User;
 import com.pilipili.server.exception.BusinessException;
 import com.pilipili.server.exception.BusinessExceptionCode;
@@ -14,7 +15,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.UuidUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -28,6 +32,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Resource
+    private UserMapper userMapper;
 
     @Override
     public ResponseDto register(User user) {
@@ -66,5 +72,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 throw new BusinessException(BusinessExceptionCode.LOGIN_EMAIL_ERROR);
             }
         }
+    }
+
+    @Override
+    public UserDto getByUserId(String userId) {
+        return userMapper.getByUserId(new QueryWrapper<UserDto>().eq("id", userId));
     }
 }

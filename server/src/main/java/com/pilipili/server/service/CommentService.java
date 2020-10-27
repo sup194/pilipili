@@ -18,4 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface CommentService extends IService<Comment> {
 
     IPage<CommentDto> paging(Page page, QueryWrapper<CommentDto> wrapper);
+
+    void mySave(CommentDto commentDto);
 }
