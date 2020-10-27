@@ -158,7 +158,7 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p v-for="(o, index) in entertainmentHots.slice(0, 10)"><span>{{index}}</span>
+              <p v-for="(o, index) in entertainmentHots.slice(0, 11)"><span>{{index}}</span>
                 <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
               </p>
             </div>
@@ -194,7 +194,7 @@
             </div>
             <div class="pili-fun-rank">
 
-              <p v-for="(o, index) in studyHots.slice(0, 10)"><span>{{index}}</span>
+              <p v-for="(o, index) in studyHots.slice(0, 11)"><span>{{index}}</span>
                 <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
               </p>
 
@@ -343,6 +343,9 @@
 
   .pili-fun-rank p {
     font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .pili-fun-list div {

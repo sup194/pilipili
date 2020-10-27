@@ -114,11 +114,11 @@
         </div>
         <div class="col-sm-3">
           <div style="float:left; display:inline">
-            <img src="/static/image/avatar.jpg" width="60" height="60" style="border-radius: 50%"/>
+            <img v-bind:src="user.avatar" width="60" height="60" style="border-radius: 50%"/>
           </div>
           <div style="float:left; display:inline; width: 70%; padding: 5px 0 0 7px">
-            <span class="pili-username">非洲飞哥正能量</span><br>
-            <span class="pili-desc">江苏人，非洲工作第8年，与朋友合股生意</span>
+            <span class="pili-username">{{user.username}}</span><br>
+            <span class="pili-desc">{{user.sign}}</span>
           </div>
           <br><br><br>
           <div class="pili-rec-title">
@@ -280,15 +280,22 @@
     methods: {
       findVideo() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/detail/' + _this.id).then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/video/detail/' + _this.id).then((response) => {
           let resp = response.data;
           _this.video = resp.content;
-          _this.user = _this.video.user || {};
-          _this.comments = _this.video.comments;
-          _this.playerOptions.sources[0].src = _this.video.src;
+          _this.user = _this.video.userDto || {};
+          _this.playerOptions.sources[0].src = _this.video.url;
           _this.playerOptions.poster = _this.video.image;
         })
       },
+
+      findComment() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/comment/list/' + _this.id).then((response) => {
+          let resp = response.data;
+          _this.comments = resp.comments;
+        })
+      }
     },
 
   }
