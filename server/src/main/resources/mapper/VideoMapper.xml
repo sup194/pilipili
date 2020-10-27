@@ -12,4 +12,12 @@
         JOIN user u ON v.user_id = u.id
         ${ew.customSqlSegment}
     </select>
+    <select id="selectNewList" resultType="com.pilipili.server.dto.VideoDto">
+        SELECT
+            v.*,
+            u.`name` as username
+        FROM video v
+        JOIN user u	ON v.user_id = u.id
+        ${ew.customSqlSegment}
+    </select>
 </mapper>

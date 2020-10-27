@@ -23,4 +23,7 @@ public interface VideoService extends IService<Video> {
     void mySave(VideoDto videoDto);
 
     VideoVo findVideoById(String id);
+
+    IPage<VideoDto> paging(Page page, String sign, String status, String order);
+
 }
