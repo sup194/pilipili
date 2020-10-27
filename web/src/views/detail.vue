@@ -27,10 +27,10 @@
               <img v-bind:src="loginMember.image" width="48" height="48" style="border-radius: 50%">
             </div>
             <div style="width: 77%; float: left">
-              <textarea class="form-control" rows="3" placeholder="发条友善的评论" style="font-size: 12px; color: #555;"></textarea>
+              <textarea v-model="comment.content" class="form-control" rows="3" placeholder="发条友善的评论" style="font-size: 12px; color: #555;"></textarea>
             </div>
             <div style="float: left; margin-left: 1rem">
-              <button type="button" class="btn" id="commentBtn">发表<br>评论</button>
+              <button type="button" class="btn" id="commentBtn" v-on:click="addComment()">发表<br>评论</button>
             </div>
           </div>
 
@@ -41,11 +41,11 @@
           <div class="pili-comment-list">
 
             <div class="pili-comment-list-item" v-for="o in comments">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/nologin.jpg" width="48"
+              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img v-bind:src="o.userDto.avatar" width="48"
                                                                       height="48"/></div>
               <div style="float: left; width: 80%">
-                <a>{{o.name}}</a><br>
-                <span>{{o.sign}}</span>
+                <a>{{o.userDto.username}}</a><br>
+                <span>{{o.content}}</span>
                 <p>2020-10-05 09:10:48</p>
                 <div style="width: 111%; padding-bottom: 1rem">
                   <hr>
@@ -155,6 +155,7 @@
         id: "",
         video: {},
         user: {},
+        comment: {},
         comments: [],
         recommendList: [],
         loginMember: {},
@@ -190,6 +191,7 @@
       _this.id = _this.$route.query.id;
       _this.loginMember = Tool.getLoginMember();
       _this.findVideo();
+      _this.findComment();
     },
 
     methods: {
@@ -239,7 +241,18 @@
           let resp = response.data;
           _this.comments = resp.comments;
         })
-      }
+      },
+
+      addComment() {
+        let _this = this;
+        _this.comment.userId = Tool.getLoginMember().id;
+        _this.comment.videoId = _this.video.id;
+        _this.$ajax.get('http://localhost:9000/business/web/comment/add/' + _this.comment).then((response) => {
+          let resp = response.data;
+          _this.comments = resp.comments;
+        })
+      },
+
     },
 
   }
