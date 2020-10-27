@@ -23,4 +23,6 @@ public interface VideoMapper extends BaseMapper<Video> {
 
 
     IPage<VideoDto> selectVideoes(Page page, @Param(Constants.WRAPPER) QueryWrapper<VideoDto> wrapper);
+
+    IPage<VideoDto> selectNewList(Page page, @Param(Constants.WRAPPER) QueryWrapper<VideoDto> wrapper);
 }

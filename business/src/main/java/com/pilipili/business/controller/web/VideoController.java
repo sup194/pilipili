@@ -46,19 +46,16 @@ public class VideoController extends BaseController {
     public ResponseDto newStudyList() {
         Page page = new Page(1, 8);
 
-        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "S")
-                .eq("status", "P")
-                .orderByDesc("created_at"));
+        IPage<VideoDto> pageData = videoService.paging(page, "S", "P", "created_at");
+
         return ResponseDto.success(pageData);
     }
 
     @GetMapping("/newEntertainmentList")
     public ResponseDto newEntertainmentList() {
         Page page = new Page(1, 8);
+        IPage<VideoDto> pageData = videoService.paging(page, "E", "P", "created_at");
 
-        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
-                .eq("status", "P")
-                .orderByDesc("created_at"));
         return ResponseDto.success(pageData);
     }
 

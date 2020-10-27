@@ -122,4 +122,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         return videoVo;
     }
+
+    @Override
+    public IPage<VideoDto> paging(Page page, String sign, String status, String order) {
+        return videoMapper.selectNewList(page, new QueryWrapper<VideoDto>()
+                .eq("sign", sign).eq("status", status).orderByDesc(order));
+    }
 }
