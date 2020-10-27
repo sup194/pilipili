@@ -2,14 +2,15 @@ package com.pilipili.business.controller.web;
 
 
 import cn.hutool.json.JSONUtil;
-import cn.hutool.system.UserInfo;
 import com.pilipili.server.dto.LoginDto;
 import com.pilipili.server.dto.LoginUserDto;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.entity.User;
 import com.pilipili.server.exception.ValidatorException;
+import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.UuidUtil;
 import com.pilipili.server.util.ValidatorUtil;
+import com.pilipili.server.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,6 +80,17 @@ public class UserController extends BaseController {
         return ResponseDto.success();
     }
 
+    @PostMapping("/edit")
+    public ResponseDto edit(@RequestBody UserVo userVo) {
+        ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(userVo);
+        if (validResult.hasErrors()) {
+            throw new ValidatorException(validResult.getErrors());
+        }
 
+        User user = CopyUtil.copy(userVo, User.class);
+
+        userService.saveOrUpdate(user);
+        return ResponseDto.success(userVo);
+    }
 
 }

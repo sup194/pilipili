@@ -98,5 +98,10 @@ public class VideoController extends BaseController {
     }
 
 
+    @GetMapping("/myVideo/{id}")
+    public ResponseDto myVideo(@PathVariable String id) {
+        IPage<VideoDto> pageData = videoService.paging(new Page(1, 8), null, id, null, "created_at");
+        return ResponseDto.success(pageData);
+    }
 
 }
