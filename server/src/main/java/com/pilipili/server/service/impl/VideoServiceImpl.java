@@ -108,18 +108,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
 
         // 查询用户
-        User user = userService.getById(video.getUserId());
-        UserDto userDto = new UserDto();
-        userDto.setUserId(user.getId());
-        userDto.setAvatar(user.getAvatar());
-        userDto.setEmail(user.getEmail());
-        userDto.setGender(user.getGender());
-        userDto.setSign(user.getSign());
-        userDto.setRole(user.getRole());
-        userDto.setUsername(user.getName());
-
+        UserDto userDto = userService.getByUserId(video.getUserId());
         videoVo.setUserDto(userDto);
-
 
         return videoVo;
     }
