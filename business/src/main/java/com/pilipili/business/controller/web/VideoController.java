@@ -65,6 +65,15 @@ public class VideoController extends BaseController {
     @GetMapping("/hotStudyList")
     public ResponseDto hotStudyList() {
         Page page = new Page(1, 10);
+        Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "S")
+                .eq("status", "P")
+                .orderByDesc("playback"));
+        return ResponseDto.success(pageData);
+    }
+
+    @GetMapping("/hotEntertainmentList")
+    public ResponseDto hotEntertainmentList() {
+        Page page = new Page(1, 10);
         Page pageData = videoService.page(page, new QueryWrapper<Video>().eq("sign", "E")
                 .eq("status", "P")
                 .orderByDesc("playback"));

@@ -88,7 +88,7 @@
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
 
-            <div class="col-sm-4 pili-carousel-item" v-for="o in hots">
+            <div class="col-sm-4 pili-carousel-item" v-for="(o, index) in hots.slice(0, 6)">
               <router-link v-bind:to="'/detail?id=' + o.id">
                 <img v-bind:src="o.image"/>
                 <div class="pili-carousel-mask">
@@ -112,9 +112,9 @@
           <div class="col-sm-8">
             <div class="row pili-video-list">
 
-              <div class="col-sm-3" v-for="o in news">
+              <div class="col-sm-3" v-for="(o, index) in news.slice(0, 4)">
                 <router-link v-bind:to="'/detail?id=' + o.id">
-                  <img v-bind:src="o.image" />
+                  <img v-bind:src="o.image"/>
                   <p>{{o.name}}</p>
                 </router-link>
                 <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
@@ -142,12 +142,12 @@
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
 
-              <div class="col-sm-3" v-for="o in entertainmentHots">
+              <div class="col-sm-3" v-for="o in entertainmentNews.slice(0, 8)">
                 <router-link v-bind:to="'/detail?id=' + o.id">
-                  <img v-bind:src="o.image" />
+                  <img v-bind:src="o.image"/>
                   <p>{{o.name}}</p>
                 </router-link>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.userId}}</a>
               </div>
 
             </div>
@@ -158,7 +158,9 @@
               <span class="video-list-btn">更多&nbsp;<i class="fa fa-angle-right"></i> </span>
             </div>
             <div class="pili-fun-rank">
-              <p v-for="(o, index) in entertainmentHots"><span>{{index}}}</span> <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link></p>
+              <p v-for="(o, index) in entertainmentHots.slice(0, 10)"><span>{{index}}</span>
+                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+              </p>
             </div>
           </div>
         </div>
@@ -175,9 +177,9 @@
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
 
-              <div class="col-sm-3" v-for="o in studyHots">
+              <div class="col-sm-3" v-for="o in studyNews.slice(0, 8)">
                 <router-link v-bind:to="'/detail?id=' + o.id">
-                  <img v-bind:src="o.image" />
+                  <img v-bind:src="o.image"/>
                   <p>{{o.name}}</p>
                 </router-link>
                 <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
@@ -192,7 +194,9 @@
             </div>
             <div class="pili-fun-rank">
 
-              <p v-for="(o, index) in entertainmentHots"><span>{{index}}}</span> <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link></p>
+              <p v-for="(o, index) in studyHots.slice(0, 10)"><span>{{index}}</span>
+                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+              </p>
 
             </div>
           </div>
@@ -224,22 +228,30 @@
         news: [],
         hots: [],
         studyHots: [],
-        entertainmentHots:[],
+        entertainmentHots: [],
+        studyNews: [],
+        entertainmentNews: [],
       }
     },
 
     mounted() {
       let _this = this;
+      _this.listNew();
+      _this.listHot();
+      _this.listEntertainmentHots();
+      _this.listEntertainmentNews();
+      _this.listStudyNews();
+      _this.listStudyHots();
     },
 
     methods: {
 
       listNew() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/listNew').then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/video/listNew').then((response) => {
           let resp = response.data;
           if (resp.success) {
-            _this.news = resp.content;
+            _this.news = resp.content.records;
           }
         }).catch((response) => {
           console.log("error：", response);
@@ -248,10 +260,10 @@
 
       listHot() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotList').then((response) => {
           let resp = response.data;
           if (resp.success) {
-            _this.hots = resp.content;
+            _this.hots = resp.content.records;
           }
         }).catch((response) => {
           console.log("error：", response);
@@ -260,10 +272,10 @@
 
       listStudyHots() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotStudyList').then((response) => {
           let resp = response.data;
           if (resp.success) {
-            _this.studyHots = resp.content;
+            _this.studyHots = resp.content.records;
           }
         }).catch((response) => {
           console.log("error：", response);
@@ -272,10 +284,34 @@
 
       listEntertainmentHots() {
         let _this = this;
-        _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/video/hotList').then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/video/hotEntertainmentList').then((response) => {
           let resp = response.data;
           if (resp.success) {
-            _this.entertainmentHots = resp.content;
+            _this.entertainmentHots = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listStudyNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newStudyList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.studyNews = resp.content.records;
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
+      },
+
+      listEntertainmentNews() {
+        let _this = this;
+        _this.$ajax.get('http://localhost:9000/business/web/video/newEntertainmentList').then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.entertainmentNews = resp.content.records;
           }
         }).catch((response) => {
           console.log("error：", response);
