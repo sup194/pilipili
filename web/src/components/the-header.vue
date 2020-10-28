@@ -43,7 +43,7 @@
 
             <span v-show="loginMember.id">
               <li class="nav-item active avatar-li">
-              <img v-show="!loginMember.avatar" src="/static/image/avatar.jpg" class="avatar-img"/>
+              <!--<img v-show="!loginMember.avatar" src="/static/image/avatar.jpg" class="avatar-img"/>-->
                 <img v-show="loginMember.avatar" v-bind:src="loginMember.avatar" class="avatar-img"/>
               <div class="user-info">
                 <p style=" color: #FB7299; font-weight: bold; margin-bottom: -0.3rem">{{loginMember.name}}</p>
@@ -234,9 +234,9 @@
         _this.video.userId = _this.loginMember.id;
         console.log(categories);
 
-        Loading.show();
+        // Loading.show();
         _this.$ajax.post('http://localhost:9000/business/web/video/contribution', _this.video).then((response)=>{
-          Loading.hide();
+          // Loading.hide();
           let resp = response.data;
           if (resp.success) {
             $('#contributionModal').modal('hide');

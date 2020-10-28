@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Data
@@ -35,4 +36,19 @@ public class CommentDto implements Serializable {
     private String content;
 
     private UserDto userDto;
+
+    /**
+     * 用户头像
+     */
+    private String avatar;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 创建时间
+     */
+    private Date createdAt;
 }

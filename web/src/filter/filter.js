@@ -62,7 +62,7 @@ let formatSecond = (value) => {
   // 拼上分钟
   result = "" + PrefixInteger(minute, 2) + ":" + result;
   // 拼上小时
-  result = "" + PrefixInteger(hour, 2) + ":" + result;
+  // result = "" + PrefixInteger(hour, 2) + ":" + result;
   return result;
 };
 
@@ -89,8 +89,16 @@ let formatFileSize = (value) => {
   return result;
 };
 
+import dateFormat from '../../public/static/js/date.js'
+
+let formatDate = (time) => {
+  let date = new Date(time);
+  return dateFormat.formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+};
+
 export default {
   optionKV,
   formatSecond,
-  formatFileSize
+  formatFileSize,
+  formatDate
 }

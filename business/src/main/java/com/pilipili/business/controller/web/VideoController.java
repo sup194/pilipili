@@ -44,7 +44,7 @@ public class VideoController extends BaseController {
 
     @GetMapping("/newStudyList")
     public ResponseDto newStudyList() {
-        Page page = new Page(1, 8);
+        Page page = new Page(1, 10);
 
         IPage<VideoDto> pageData = videoService.paging(page, "S", "P", "created_at");
 
@@ -53,7 +53,7 @@ public class VideoController extends BaseController {
 
     @GetMapping("/newEntertainmentList")
     public ResponseDto newEntertainmentList() {
-        Page page = new Page(1, 8);
+        Page page = new Page(1, 10);
         IPage<VideoDto> pageData = videoService.paging(page, "E", "P", "created_at");
 
         return ResponseDto.success(pageData);

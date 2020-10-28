@@ -4,30 +4,35 @@
       <div class="row">
         <div class="col-sm-9">
           <span class="pili-tit">{{video.name}}</span><br>
-          <span class="pili-video-data">{{video.playback}}播放&nbsp;·&nbsp;90评论&nbsp;{{video.createdAt}}</span>
-          <div class="video-box" style="margin-top: 1rem; margin-bottom: 0.6rem">
+          <span class="pili-video-data">{{video.playback}} 播放&nbsp;·&nbsp;{{comments.length}} 评论&nbsp;&nbsp;&nbsp;{{(video.createdAt) | formatDate}}</span>
+          <div class="video-box" style="margin-top: 1rem; padding-bottom: 0.6rem">
             <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
                           :options="playerOptions"></video-player>
           </div>
+          <hr>
+          <span style="font-size: 12px; color: #999;"><i class="fa fa-ban" style="font-size: 16px; margin-right: 5px; color: #fd676f;"></i>未经作者授权，禁止转载</span>
+          <p style="font-size: 13px; color: #212121; margin-top: 0.6rem">{{video.summary}}</p>
           <div class="pili-label">
             <span v-for="o in video.categories">{{o.name}}</span>
           </div>
           <hr>
           <div class="pili-comment-head">
-            <span>6 评论</span>
+            <span>{{comments.length}} 评论</span>
           </div>
           <ul class="pili-comment-sort list-inline">
-            <li class="pili-hot-sort pili-sort-on">按热度排序</li>
-            <li class="pili-new-sort">按时间排序</li>
+            <li class="pili-hot-sort pili-sort-on">按时间排序</li>
+            <li class="pili-new-sort">按热度排序</li>
           </ul>
           <br>
           <hr>
           <div>
             <div style="float: left; padding: 5px 20px">
-              <img v-bind:src="loginMember.avatar" width="48" height="48" style="border-radius: 50%">
+              <img v-show="!loginMember.id" src="/static/image/nologin.jpg" width="48" height="48" style="border-radius: 50%"/>
+              <img v-show="loginMember.id" v-bind:src="loginMember.avatar" width="48" height="48" style="border-radius: 50%"/>
             </div>
             <div style="width: 77%; float: left">
-              <textarea v-model="comment.content" class="form-control" rows="3" placeholder="发条友善的评论" style="font-size: 12px; color: #555;"></textarea>
+              <textarea v-model="comment.content" class="form-control" rows="3" placeholder="发条友善的评论"
+                        style="font-size: 12px; color: #555;"></textarea>
             </div>
             <div style="float: left; margin-left: 1rem">
               <button type="button" class="btn" id="commentBtn" v-on:click="addComment()">发表<br>评论</button>
@@ -41,12 +46,12 @@
           <div class="pili-comment-list">
 
             <div class="pili-comment-list-item" v-for="o in comments">
-              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img src="/static/image/avatar.jpg" width="48"
+              <div style="float: left; margin:0 1.5rem 0 1.3rem"><img v-bind:src="o.avatar" width="48"
                                                                       height="48"/></div>
               <div style="float: left; width: 80%">
-                <a>{{o.userId}}</a><br>
+                <a>{{o.username}}</a><br>
                 <span>{{o.content}}</span>
-                <p>2020-10-05 09:10:48</p>
+                <p>{{(o.createdAt) | formatDate}}</p>
                 <div style="width: 111%; padding-bottom: 1rem">
                   <hr>
                 </div>
@@ -71,14 +76,15 @@
           <div>
 
             <div style="height: 98px" v-for="o in recommendList">
-              <div style="width: 45%; float: left;" >
+              <div style="width: 45%; float: left; position: relative;">
                 <img v-bind:src="o.image" width="100%"
                      height="90"/>
+                <div class="pili-detail-time">{{(o.time) | formatSecond}} </div>
               </div>
               <div style="float: right; width: 53%" class="pili-rec-info">
                 <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">{{o.name}}</router-link>
                 <span>{{o.username}}</span><br>
-                <span>{{o.playback}} 播放 · 69 评论</span>
+                <span>{{o.playback}} 播放 · 0 评论</span>
               </div>
             </div>
 
@@ -86,7 +92,8 @@
 
         </div>
       </div>
-    </div><br><br>
+    </div>
+    <br><br>
   </main>
 </template>
 
@@ -180,7 +187,7 @@
 
       findComment() {
         let _this = this;
-          _this.$ajax.get('http://localhost:9000/business/web/comment/list/' + _this.id).then((response) => {
+        _this.$ajax.get('http://localhost:9000/business/web/comment/list/' + _this.id).then((response) => {
           let resp = response.data.content;
           _this.comments = resp.records;
           console.log(_this.comments);
@@ -189,7 +196,21 @@
 
       addComment() {
         let _this = this;
-        _this.comment.userId = Tool.getLoginMember().id;
+        let loginMember = Tool.getLoginMember();
+        if (Tool.isEmpty(loginMember)) {
+          toast.warning("登录之后才可以评论哦~");
+          return;
+        }
+
+        // 保存校验
+        if (1 != 1
+          || !Validator.require(_this.comment.content, "评论内容")
+          || !Validator.length(_this.comment.content, "评论内容", 1, 200)
+        ) {
+          return;
+        }
+
+        _this.comment.userId = loginMember.id;
         _this.comment.videoId = _this.video.id;
         _this.$ajax.post('http://localhost:9000/business/web/comment/add', _this.comment).then((response) => {
           let resp = response.data;
@@ -342,5 +363,13 @@
   .pili-comment-list-item span {
     font-size: 14px;
     text-shadow: none;
+  }
+
+  .pili-detail-time {
+    position: absolute;
+    left: 6px;
+    color: #ffffff;
+    font-size: 12px;
+    top: 70px;
   }
 </style>

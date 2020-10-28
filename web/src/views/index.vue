@@ -89,7 +89,7 @@
           <div class="row pili-carousel-list">
 
             <div class="col-sm-4 pili-carousel-item" v-for="(o, index) in hots.slice(0, 6)">
-              <router-link v-bind:to="'/detail?id=' + o.id">
+              <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">
                 <img v-bind:src="o.image"/>
                 <div class="pili-carousel-mask">
                   <span>{{o.name}}</span><br>
@@ -106,18 +106,19 @@
 
       <div>
         <span class="pili-head-i"></span>
-        <span style="font-size: 1.6rem; margin-right: 1rem">推广</span>
+        <span style="font-size: 1.6rem; margin-right: 1rem;">推广</span>
         <span style="color: #7e858a; font-size: 0.8rem; line-height: 3.2rem;">最光荣的时刻，就是现在</span>
         <div class="row">
           <div class="col-sm-8">
             <div class="row pili-video-list">
 
-              <div class="col-sm-3" v-for="(o, index) in news.slice(0, 4)">
-                <router-link v-bind:to="'/detail?id=' + o.id">
+              <div class="col-sm-3" v-for="(o, index) in news.slice(0, 4)" style="position: relative;">
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">
                   <img v-bind:src="o.image"/>
-                  <p>{{o.name}}</p>
+                  <div class="pili-time" style="top: 90px;">{{(o.time) | formatSecond}} </div>
+                  <p style="margin-top: 0.4rem">{{o.name}}</p>
                 </router-link>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;">UP: &nbsp;{{o.username}}</a>
               </div>
 
             </div>
@@ -142,12 +143,13 @@
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
 
-              <div class="col-sm-3" v-for="o in entertainmentNews.slice(0, 8)">
-                <router-link v-bind:to="'/detail?id=' + o.id">
+              <div class="col-sm-3" v-for="o in entertainmentNews.slice(0, 8)" style="position: relative;">
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">
                   <img v-bind:src="o.image"/>
-                  <p>{{o.name}}</p>
+                  <div class="pili-time" style="top: 78px;">{{(o.time) | formatSecond}} </div>
+                  <p style="margin-top: 0.4rem">{{o.name}}</p>
                 </router-link>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;">UP: &nbsp;{{o.username}}</a>
               </div>
 
             </div>
@@ -159,7 +161,7 @@
             </div>
             <div class="pili-fun-rank">
               <p v-for="(o, index) in entertainmentHots.slice(0, 11)"><span>{{index+1}}</span>
-                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">{{o.name}}</router-link>
               </p>
             </div>
           </div>
@@ -177,12 +179,13 @@
               class="fa fa-refresh fa-spin"></i>&nbsp;换一换</span>
             <div class="row pili-fun-list pili-video-list">
 
-              <div class="col-sm-3" v-for="o in studyNews.slice(0, 8)">
-                <router-link v-bind:to="'/detail?id=' + o.id">
+              <div class="col-sm-3" v-for="o in studyNews.slice(0, 8)" style="position: relative;">
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">
                   <img v-bind:src="o.image"/>
-                  <p>{{o.name}}</p>
+                  <div class="pili-time" style="top: 78px;">{{(o.time) | formatSecond}} </div>
+                  <p style="margin-top: 0.4rem">{{o.name}}</p>
                 </router-link>
-                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;"><span>up</span>{{o.username}}</a>
+                <a href="#" style="color: #b5b5b5; font-size: 0.7rem;">UP: &nbsp;{{o.username}}</a>
               </div>
 
             </div>
@@ -195,7 +198,7 @@
             <div class="pili-fun-rank">
 
               <p v-for="(o, index) in studyHots.slice(0, 11)"><span>{{index+1}}</span>
-                <router-link v-bind:to="'/detail?id=' + o.id">{{o.name}}</router-link>
+                <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">{{o.name}}</router-link>
               </p>
 
             </div>
@@ -394,12 +397,6 @@
     border-radius: 4px;
   }
 
-  .pili-video-list span {
-    border: solid 1px #b5b5b5;
-    border-radius: 3px;
-    margin-right: 0.4rem;
-  }
-
   .pili-video-list p {
     font-size: 0.8rem;
   }
@@ -526,5 +523,12 @@
     text-align: center;
     cursor: pointer;
     float: left;
+  }
+
+  .pili-time {
+    position: absolute;
+    right: 20px;
+    color: #ffffff;
+    font-size: 13px;
   }
 </style>

@@ -6,14 +6,12 @@
         SELECT
             c.*,
             u.id AS userId,
-            u.avatar,
-            u.email,
-            u.gender,
+            u.avatar AS avatar,
             u.`name` AS username,
             u.sign,
             u.role
         FROM `comment` c
-        JOIN user u ON c.user_id = u.id
+        JOIN `user` u ON c.user_id = u.id
         ${ew.customSqlSegment}
     </select>
 </mapper>
