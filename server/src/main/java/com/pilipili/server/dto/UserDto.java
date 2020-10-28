@@ -43,5 +43,9 @@ public class UserDto implements Serializable {
      * 角色
      */
     private String role;
+    /**
+     * 密码
+     */
+    private String password;
 
 }

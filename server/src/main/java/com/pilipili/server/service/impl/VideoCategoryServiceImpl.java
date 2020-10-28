@@ -1,7 +1,11 @@
 package com.pilipili.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.CategoryDto;
+import com.pilipili.server.dto.VideoDto;
+import com.pilipili.server.entity.Category;
 import com.pilipili.server.entity.VideoCategory;
 import com.pilipili.server.mapper.VideoCategoryMapper;
 import com.pilipili.server.service.VideoCategoryService;
@@ -31,13 +35,15 @@ public class VideoCategoryServiceImpl extends ServiceImpl<VideoCategoryMapper, V
     public List<CategoryDto> listByVideoId(QueryWrapper<CategoryDto> wrapper) {
         return videoCategoryMapper.listByVideoId(wrapper);
     }
+
     @Override
     public IPage<VideoDto> QueryVideoByCategoryID(Page page, String category_id) {
-        return video_categoryMapper.QueryVideoByCategoryID(page,category_id);
+        return videoCategoryMapper.QueryVideoByCategoryID(page,category_id);
     }
 
     @Override
     public List<Category> QueryCategoryById(String video_id) {
-        return video_categoryMapper.QueryCategoryById(video_id);
+        return videoCategoryMapper.QueryCategoryById(video_id);
     }
+
 }

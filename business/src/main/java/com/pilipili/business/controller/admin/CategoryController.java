@@ -4,17 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pilipili.server.dto.CategoryDto;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.entity.Category;
-import com.pilipili.server.entity.Video_Category;
 import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.service.CategoryService;
-import com.pilipili.server.service.Video_CategoryService;
 import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.ValidatorUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
 import java.util.List;
 
 /**

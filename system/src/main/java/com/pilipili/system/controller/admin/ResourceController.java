@@ -1,5 +1,6 @@
 package com.pilipili.system.controller.admin;
 
+import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.entity.Resource;
 import com.pilipili.server.service.ResourceService;
 import org.springframework.web.bind.annotation.*;
@@ -26,21 +27,21 @@ import java.util.List;
 public class ResourceController extends BaseController {
 
 
-    @Autowired
-    private ResourceService resourceService;
-
-    //    List列表查询
-    @GetMapping(value = "/")
-    public ResponseDto list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
-        if (current == null) {
-            current = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        Page<Resource> aPage = resourceService.page(new Page<>(current, pageSize));
-        return ResponseDto.success(aPage);
-    }
+//    @Autowired
+//    private ResourceService resourceService;
+//
+//    //    List列表查询
+//    @GetMapping(value = "/")
+//    public ResponseDto list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
+//        if (current == null) {
+//            current = 1;
+//        }
+//        if (pageSize == null) {
+//            pageSize = 10;
+//        }
+//        Page<Resource> aPage = resourceService.page(new Page<>(current, pageSize));
+//        return ResponseDto.success(aPage);
+//    }
 
     /**
      * 保存，id有值时更新，无值时新增
@@ -59,14 +60,14 @@ public class ResourceController extends BaseController {
 //        return ResponseDto.success();
 //    }
 
-    /**
-     * 删除
-     */
-    @PostMapping(value = "/delete/{id}")
-    public ResponseDto delete(@PathVariable("id") String id) {
-        resourceService.removeById(id);
-        return ResponseDto.success();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping(value = "/delete/{id}")
+//    public ResponseDto delete(@PathVariable("id") String id) {
+//        resourceService.removeById(id);
+//        return ResponseDto.success();
+//    }
 
     /**
      * 资源树查询

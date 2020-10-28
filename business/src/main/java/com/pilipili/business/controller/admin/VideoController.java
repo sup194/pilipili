@@ -1,23 +1,20 @@
 package com.pilipili.business.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pilipili.server.dto.ResponseDto;
 import com.pilipili.server.dto.VideoDto;
 import com.pilipili.server.entity.Category;
+import com.pilipili.server.entity.User;
 import com.pilipili.server.entity.Video;
-import com.pilipili.server.entity.Video_Category;
 import com.pilipili.server.exception.ValidatorException;
-import com.pilipili.server.service.CategoryService;
+import com.pilipili.server.service.VideoCategoryService;
 import com.pilipili.server.service.VideoService;
-import com.pilipili.server.service.Video_CategoryService;
+import com.pilipili.server.util.CopyUtil;
 import com.pilipili.server.util.ValidatorUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,20 +35,20 @@ public class VideoController {
     @Resource
     VideoService videoService;
     @Resource
-    Video_CategoryService video_categoryService;
+    VideoCategoryService videocategoryService;
 
 
 
 //    查找分类下所有的视频
     @PostMapping("/QueryVideoByCategoryID/{category_id}")
-    public ResponseDto QueryVideoByCategoryID(@PathVariable String category_id){
+    public ResponseDto QueryVideoByCategoryID(@PathVariable("category_id") String category_id){
 
         if (category_id.isEmpty()){
             throw new ValidatorException("分类ID不能为空");
         }
         Page page = new Page(1, 4);
 
-        IPage<VideoDto> videoDtoIPage = video_categoryService.QueryVideoByCategoryID(page,category_id);
+        IPage<VideoDto> videoDtoIPage = videocategoryService.QueryVideoByCategoryID(page,category_id);
         return ResponseDto.success(videoDtoIPage);
     }
 
@@ -64,23 +61,25 @@ public class VideoController {
             throw new ValidatorException("视频ID不能为空");
         }
 
-        List<Category> videoList = video_categoryService.QueryCategoryById(video_id);
+        List<Category> videoList = videocategoryService.QueryCategoryById(video_id);
 
         return ResponseDto.success(videoList);
     }
 
 //    添加视频
 //    视频审核(修改)
-    @PostMapping("/saveVideo")
-    public ResponseDto saveVideo(VideoDto videoDto){
-        log.info("添加视频");
+    @PostMapping("/SaveOrUpdateVideo")
+    public ResponseDto SaveOrUpdateVideo(VideoDto videoDto){
+        log.info("修改或添加视频");
         ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(videoDto);
 
         if (validResult.hasErrors()) {
             throw new ValidatorException(validResult.getErrors());
         }
 
-        videoService.saveOrUpdate(videoDto);
+        Video video = CopyUtil.copy(videoDto, Video.class);
+
+        videoService.saveOrUpdate(video);
         return ResponseDto.success();
     }
 

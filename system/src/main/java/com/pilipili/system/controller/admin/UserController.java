@@ -80,7 +80,7 @@ public class UserController extends BaseController {
     @PostMapping("/save-password")
     public ResponseDto savePassword(@RequestBody UserDto userDto) {
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
-        User user = userService.getById(userDto.getId());
+        User user = userService.getById(userDto.getUserId());
         user.setPassword(userDto.getPassword());
         userService.saveOrUpdate(user);
         return ResponseDto.success();
