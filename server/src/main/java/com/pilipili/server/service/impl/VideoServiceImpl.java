@@ -51,9 +51,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .orderByDesc(order != null, order);
 
 
-        return videoMapper.selectVideoes(page,wrapper);
+        return videoMapper.selectVideoes(page, wrapper);
     }
-
 
 
     @Override
@@ -88,6 +87,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     /**
      * 查找某一课程，供web模块用，只能查已发布的
+     *
      * @param id
      * @return
      */

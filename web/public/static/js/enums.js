@@ -8,6 +8,7 @@ SMS_USE={REGISTER:{key:"R", value:"注册"},FORGET:{key:"F", value:"忘记密码
 SMS_STATUS={USED:{key:"U", value:"已使用"},NOT_USED:{key:"N", value:"未使用"}};
 
 USER_ROLE={ADMIN:{key:"A", value:"管理员"},GENERAL:{key:"G", value:"尊贵用户"}};
+CONTRIBUTION_STATUS={REVIEW:{key:"R", value:"审核中"}, PASS:{key:"P", value:"通过"}, OVERRULE:{key:"O", value:"驳回"}};
 
 SECTION_CHARGE_ARRAY=[{key:"C", value:"收费"},{key:"F", value:"免费"}];
 YES_NO_ARRAY=[{key:"1", value:"是"},{key:"0", value:"否"}];

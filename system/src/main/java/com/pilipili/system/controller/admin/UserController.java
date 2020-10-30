@@ -1,18 +1,30 @@
 package com.pilipili.system.controller.admin;
 
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.pilipili.server.dto.PageDto;
-import com.pilipili.server.dto.ResponseDto;
-import com.pilipili.server.dto.UserDto;
+import com.pilipili.server.dto.*;
+import com.pilipili.server.exception.ValidatorException;
 import com.pilipili.server.service.UserService;
+import com.pilipili.server.util.UuidUtil;
+import com.pilipili.server.util.ValidatorUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.pilipili.server.entity.User;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -22,40 +34,61 @@ import com.pilipili.server.entity.User;
  * @author sup
  * @since 2020-09-24
  */
+@Slf4j
 @RestController
 @RequestMapping("/admin/user")
 public class UserController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
-    public static final String BUSINESS_NAME = "用户";
 
+    @Autowired
+    protected RedisTemplate redisTemplate;
 
+    //login
+    @PostMapping("/login")
+    public ResponseDto login(@RequestBody LoginDto loginDto) {
 
+        log.info("用户登录开始");
 
-
-    @GetMapping(value = "/")
-    public ResponseEntity<Page<User>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
-        if (current == null) {
-            current = 1;
+        //  验证邮箱密码
+        ValidatorUtil.ValidResult validResult = ValidatorUtil.validateBean(loginDto);
+        if (validResult.hasErrors()) {
+            throw new ValidatorException("邮箱或密码不能为空");
         }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        Page<User> aPage = userService.page(new Page<>(current, pageSize));
-        return new ResponseEntity<>(aPage, HttpStatus.OK);
+
+        LoginUserDto loginUserDto = userService.login(loginDto);
+        String token = UuidUtil.getShortUuid();
+        loginUserDto.setToken(token);
+        redisTemplate.opsForValue().set(token, JSONUtil.toJsonStr(loginUserDto), 3600, TimeUnit.SECONDS);
+
+        return ResponseDto.success(loginUserDto);
+    }
+
+    //list
+    @GetMapping("/list")
+    public ResponseDto list() {
+        LOG.info("用户查询");
+        Page<User> aPage = userService.page(new Page<>(1, 6));
+        return ResponseDto.success(aPage);
     }
 
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<Object> create(@RequestBody User params) {
-        userService.save(params);
-        return new ResponseEntity<>("created successfully", HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/delete/{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+    //  通过ID删除
+    @PostMapping("/delete/{id}")
+    public ResponseDto delete(@PathVariable("id") String id) {
         userService.removeById(id);
-        return new ResponseEntity<>("deleted successfully", HttpStatus.OK);
+        return ResponseDto.success();
+    }
+
+
+    /**
+     * 退出登录
+     */
+    @GetMapping("/logout/{token}")
+    public ResponseDto logout(@PathVariable String token) {
+        redisTemplate.delete(token);
+        LOG.info("从redis中删除token:{}", token);
+        return ResponseDto.success();
     }
 
 }
