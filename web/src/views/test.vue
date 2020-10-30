@@ -15,6 +15,9 @@
         您的浏览器不支持 video 标签。
       </video>
     </div>
+
+    <button @click="showHide">点击我</button>
+    <div v-if="show">hello</div>
   </div>
 
 </template>
@@ -30,6 +33,7 @@
     },
     data: function () {
       return {
+        show: true,
         section: {},
         sections: [],
         SECTION_CHARGE: SECTION_CHARGE,
@@ -43,6 +47,11 @@
     },
 
     methods: {
+
+      showHide: function() {
+        this.show = !this.show;
+      },
+
       afterUpload(resp) {
         let _this = this;
         let video = resp.content.path;

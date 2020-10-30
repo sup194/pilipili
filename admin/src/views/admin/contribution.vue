@@ -17,16 +17,17 @@
     <div class="row">
 
       <div class="col-sm-3" style="margin-bottom: 2rem" v-for="contribution in contributions">
-        <span class="badge badge-danger" style="font-size: 16px; position: absolute; top: 5px; right: 17px">ID: {{contribution.id}}</span>
+        <span class="badge badge-danger" style="font-size: 14px; position: absolute; top: 5px; right: 17px">ID: {{contribution.id}}</span>
         <video v-bind:src="contribution.url"
                controls="controls" width="100%" class="pili-contribution-video">
           您的浏览器不支持 video 标签。
         </video>
-        <a class="pili-contribution-title">{{contribution.name}}&nbsp; <span class="badge badge-pink"
-                                                                             style="font-weight: bold">{{CONTRIBUTION_STATUS | optionKV(contribution.status)}}</span></a>
+        <a class="pili-contribution-title"><span class="badge badge-pink"
+                                                 style="font-weight: bold">{{CONTRIBUTION_STATUS | optionKV(contribution.status)}}</span>
+          {{contribution.name}}</a>
         <span class="pili-contribution-time">投稿于： {{(contribution.createdAt) | formatDate}}， &nbsp;&nbsp;&nbsp; UP：  {{contribution.username}}</span>
-        <i class="fa fa-ellipsis-v pili-contribution-icon">
-          <div class="pili-contribution-operate">
+        <i class="fa fa-ellipsis-v pili-contribution-icon" @click="toggle(contribution)">
+          <div class="pili-contribution-operate" v-if="contribution.show">
             <ul class="list-inline">
               <li>通过</li>
               <li>下架</li>
@@ -37,21 +38,12 @@
       </div>
 
     </div>
+    <br>
 
   </div>
 </template>
 
 <script>
-
-  $(document).ready(function () {
-    $('.pili-contribution-icon').click(function () {
-      if ($(this).find('.pili-contribution-operate').css("display") == "none") {
-        $(this).find('.pili-contribution-operate').show();
-      } else {
-        $(this).find('.pili-contribution-operate').hide();
-      }
-    });
-  });
 
   import Pagination from "../../components/pagination";
 
@@ -72,10 +64,13 @@
       _this.list(1);
       // sidebar激活样式方法一
       // this.$parent.activeSidebar("business-course-sidebar");
-
     },
 
     methods: {
+
+      toggle: function(item) {
+        item.show = !item.show;
+      },
 
       /**
        * 列表查询
@@ -115,7 +110,6 @@
 
     }
   }
-
 
 
 </script>
@@ -181,7 +175,7 @@
 
   .pili-contribution-video {
     border-radius: 4px;
-    height: 23rem;
+    height: 14rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .16);
     border: 1px solid #e5e9ef;
   }

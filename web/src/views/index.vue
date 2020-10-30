@@ -88,12 +88,12 @@
         <div class="col-sm-6">
           <div class="row pili-carousel-list">
 
-            <div class="col-sm-4 pili-carousel-item" v-for="(o, index) in hots.slice(0, 6)">
+            <div class="col-sm-4 pili-carousel-item" v-for="(o, index) in hots.slice(0, 6)" @mouseenter="toggle(o)" @mouseleave="toggle(o)">
               <router-link v-bind:to="'/detail?id=' + o.id" target="_blank">
                 <img v-bind:src="o.image"/>
-                <div class="pili-carousel-mask">
+                <div class="pili-carousel-mask" v-if="o.show">
                   <span>{{o.name}}</span><br>
-                  <span>up {{o.username}}</span>
+                  <span>up：{{o.username}}</span>
                   <i class="fa fa-play-circle-o"></i>
                 </div>
               </router-link>
@@ -237,6 +237,12 @@
 
     methods: {
 
+      toggle: function(item) {
+        console.log("我进来了");
+        console.log(item.show);
+        item.show = !item.show;
+      },
+
       listNew() {
         let _this = this;
         _this.$ajax.get('http://localhost:9000/business/web/video/listNew').then((response) => {
@@ -311,18 +317,6 @@
 
     }
   }
-
-  $(document).ready(function () {
-
-    $(".pili-carousel-item").mouseover(function () {
-      $(this).find(".pili-carousel-mask").show();
-    });
-
-    $(".pili-carousel-item").mouseout(function () {
-      $(this).find(".pili-carousel-mask").hide();
-    })
-
-  });
 
 </script>
 
@@ -416,7 +410,7 @@
     height: 100%;
     width: 85%;
     bottom: 0;
-    display: none;
+    /*display: none;*/
     border-radius: 4px;
     padding: 0.2rem;
     background: rgba(47, 13, 26, 0.9);

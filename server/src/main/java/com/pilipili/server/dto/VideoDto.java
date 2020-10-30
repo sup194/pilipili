@@ -97,5 +97,6 @@ public class VideoDto implements Serializable {
      */
     private Integer playback;
 
+    private boolean show = false;
 
 }

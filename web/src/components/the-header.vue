@@ -53,7 +53,7 @@
                   <router-link to="/contribution" target="_blank">
                     <div style="margin-right: 1rem">
                       <span>投稿</span>
-                      <p>20</p>
+                      <p>0</p>
                     </div>
                   </router-link>
                   <div>
